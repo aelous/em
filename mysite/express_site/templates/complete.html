@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% load bootstrap3 %}
+
+{% block right_content %}
+
+<div id="content" class="span10">
+    <!-- content starts -->
+    <div>
+        <ul class="breadcrumb">
+            <li>
+                <a href="">个人中心</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row-fluid">
+        {% bootstrap_alert message alert_type='success' %}
+
+        <div class="box span4">
+            <div class="box-content">
+                {% bootstrap_label '用户名'%}： {{ user.username }}
+                <form role="form" method="post">
+                    {% bootstrap_form form %}
+                    {% buttons submit='保存' %}{% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="clear"></div>
+
+
+{% endblock %}
