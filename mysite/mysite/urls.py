@@ -20,7 +20,7 @@ from express_site import views
 urlpatterns = [
     # url(r'', views.test, name='index'),
     url(r'^admin/', admin.site.urls),
-    # url(r'^login/', views.login, name='login'),
+    url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^register/$', views.register, name='register'),
     url(r'^index/$', views.index, name='index'),
@@ -29,6 +29,6 @@ urlpatterns = [
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^search/$', views.search, name='search'),
     url(r'^settle/$', views.settle, name='settle'),
-    url(r'^$', views.login, name='login'),
+    url(r'^$', views.login),
 
 ]

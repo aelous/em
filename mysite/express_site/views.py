@@ -8,6 +8,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response, redirect
+from django.utils import timezone
 
 from form import *
 from models import *
@@ -66,8 +67,10 @@ def register(request):
                 UserProfile.objects.create_user(username=input_username, password=input_pwd, is_admin=True)
             else:
                 UserProfile.objects.create_user(username=input_username, password=input_pwd)
+            message = '注册成功，请登录'
+            return HttpResponseRedirect('/login/', {'message': '注册成功，请登录'})
+            # return render_to_response('login.html', locals())
 
-            return HttpResponseRedirect('/login', {'message': '注册成功，请登录'})
     else:
         form = RegisterForm()
     return render_to_response('register.html', locals())
@@ -115,6 +118,7 @@ def parcel(request):
                                       address=data['receiver_address']
                                       )
             receiver.save()
+            now = timezone.now()
             p = ParcelProfile(pnum=int(time.time()),
                               pname=data['pname'],
                               remark=data['remark'],
@@ -122,7 +126,8 @@ def parcel(request):
                               psupport=data['psupport'],
                               pweight=data['pweight'],
                               pdeliver=deliver,
-                              preceiver=receiver
+                              preceiver=receiver,
+                              ptime=datetime.datetime.now()
                               )
             p.save()
             user = UserProfile.objects.get(username=request.user)
@@ -134,12 +139,13 @@ def parcel(request):
         form = ParcelForm()
     return render_to_response('send.html', locals())
 
+
 @login_required
 def upload(request):
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if 'input_excel' in request.FILES:
-        # if form.is_valid():
+            # if form.is_valid():
             input_excel = request.FILES['input_excel']
             import xlrd
             data = xlrd.open_workbook(file_contents=input_excel.read())
@@ -176,6 +182,7 @@ def upload(request):
                     excel_list.append(p)
                 excel_confirm = True
                 excel_list_show = excel_list
+                message = '上传成功'
                 return render_to_response('upload.html', locals())
             else:
                 error_list = [u'短信数量提交过多，拒绝发送']
@@ -190,9 +197,9 @@ def upload(request):
         form = UploadForm()
     return render_to_response('upload.html', locals())
 
+
 @login_required
 def search(request):
-
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
@@ -206,6 +213,7 @@ def search(request):
     else:
         form = SearchForm()
     return render_to_response('search.html', locals())
+
 
 @login_required
 def settle(request):

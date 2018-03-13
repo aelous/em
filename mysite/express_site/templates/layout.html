@@ -20,10 +20,7 @@
                     <i class="icon-user"></i><span class="hidden-phone">{{request.user}}</span>
                     <span class="caret"></span>
                 </a>
-                <ul class="dropdown-menu">
-                    <li class="divider"></li>
-                    <li><a href="{% url 'logout' %}">登出</a></li>
-                </ul>
+                <a href="{% url 'logout' %}">登出</a>
             </div>
             <!-- user dropdown ends -->
         </div>
@@ -43,10 +40,7 @@
                     </li>
                     <li><a class="ajax-link" href="{% url 'search'%}"><i class="icon-home"></i><span
                             class="">寄件信息查询</span></a></li>
-                    {% if request.user.is_superuser %}
-                    <li><a class="ajax-link" href="/report_top/" target="_blank"><i class="icon-eye-open"></i><span
-                            class="">订单管理</span></a></li>
-                    {% endif %}
+
 
 
                     <li class="nav-header ">账号相关</li>

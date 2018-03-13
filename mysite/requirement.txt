@@ -1,3 +1,5 @@
+# yum install sqlite-devel
 django==1.11
 xlrd
 requests
+django-bootstrap3
