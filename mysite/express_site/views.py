@@ -15,10 +15,6 @@ from models import *
 from utils import get_date_range
 
 
-def test(request):
-    return render_to_response('test.html', locals())
-
-
 def login(request):
     if request.method == 'POST':
         # 匹配成功的话返回用户对象
@@ -81,7 +77,7 @@ def index(request):
     return render_to_response('index.html', locals())
 
 
-@login_required
+@login_required(login_url='login')
 def complete(request):
     user = request.user
     if request.method == 'POST':
@@ -100,7 +96,7 @@ def complete(request):
     return render_to_response('complete.html', locals())
 
 
-@login_required
+# @login_required(login_url='login')
 def parcel(request):
     if request.method == 'POST':
         form = ParcelForm(request.POST)
@@ -109,13 +105,18 @@ def parcel(request):
             deliver = ExpressProfile(username=data['deliver_name'],
                                      phone=data['deliver_phone'],
                                      area=data['deliver_area'],
-                                     address=data['deliver_address']
+                                     address=data['deliver_address'],
+                                     department=data['deliver_department'],
+                                     employee_id=data['deliver_employee_id'],
+                                     is_getmsg=data['deliver_is_getmsg']
                                      )
             deliver.save()
             receiver = ExpressProfile(username=data['receiver_name'],
                                       phone=data['receiver_phone'],
                                       area=data['receiver_area'],
-                                      address=data['receiver_address']
+                                      address=data['receiver_address'],
+                                      is_getmsg=data['receiver_is_getmsg']
+
                                       )
             receiver.save()
             now = timezone.now()
@@ -125,6 +126,7 @@ def parcel(request):
                               pinfo=data['pinfo'],
                               psupport=data['psupport'],
                               pweight=data['pweight'],
+                              ppayment=data['ppayment'],
                               pdeliver=deliver,
                               preceiver=receiver,
                               ptime=datetime.datetime.now()
@@ -140,7 +142,7 @@ def parcel(request):
     return render_to_response('send.html', locals())
 
 
-@login_required
+@login_required(login_url='login')
 def upload(request):
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
@@ -198,7 +200,7 @@ def upload(request):
     return render_to_response('upload.html', locals())
 
 
-@login_required
+@login_required(login_url='login')
 def search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -206,16 +208,85 @@ def search(request):
             data = form.cleaned_data
             start_time = data['start_time']
             end_time = data['end_time']
+            pnum = data['pnum']
+            pcargo_num = data['pcargo_num']
+            deliver_name = data['deliver_name']
 
             user = UserProfile.objects.get(username=request.user)
-            print user
-            info = UserParcelInfo.objects.filter(user=user, parcel__ptime__gte=start_time, parcel__ptime__lte=end_time)
+            if user.is_admin:
+                if pnum:
+                    info = UserParcelInfo.objects.filter(parcel__pnum=pnum)
+                elif pcargo_num:
+                    info = UserParcelInfo.objects.filter(parcel__pcargo_num=pcargo_num)
+                elif deliver_name:
+                    info = UserParcelInfo.objects.filter(parcel__pdeliver__username=deliver_name)
+                else:
+                    info = UserParcelInfo.objects.filter(parcel__ptime__gte=start_time, parcel__ptime__lte=end_time)
+            else:
+                if pnum:
+                    info = UserParcelInfo.objects.filter(user=user, parcel__pnum=pnum)
+                elif pcargo_num:
+                    info = UserParcelInfo.objects.filter(user=user, parcel__pcargo_num=pcargo_num)
+                elif deliver_name:
+                    info = UserParcelInfo.objects.filter(user=user, parcel__pdeliver__username=deliver_name)
+                else:
+                    info = UserParcelInfo.objects.filter(user=user, parcel__ptime__gte=start_time,
+                                                         parcel__ptime__lte=end_time)
     else:
         form = SearchForm()
     return render_to_response('search.html', locals())
 
 
-@login_required
+@login_required(login_url='login')
 def settle(request):
     info = ParcelProfile.objects.all()
     return render_to_response('settle.html', locals())
+
+def test(request):
+    print 'test'
+    if request.method == 'POST':
+        print 'post'
+        print request.POST
+        form = ParcelForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            print data
+            deliver = ExpressProfile(username=data['deliver_name'],
+                                     phone=data['deliver_phone'],
+                                     area=data['deliver_area'],
+                                     address=data['deliver_address'],
+                                     department=data['deliver_department'],
+                                     employee_id=data['deliver_employee_id'],
+                                     is_getmsg=data['deliver_is_getmsg']
+                                     )
+            deliver.save()
+            receiver = ExpressProfile(username=data['receiver_name'],
+                                      phone=data['receiver_phone'],
+                                      area=data['receiver_area'],
+                                      address=data['receiver_address'],
+                                      is_getmsg=data['receiver_is_getmsg']
+
+                                      )
+            receiver.save()
+            now = timezone.now()
+            p = ParcelProfile(pnum=int(time.time()),
+                              pname=data['pname'],
+                              remark=data['remark'],
+                              pinfo=data['pinfo'],
+                              psupport=data['psupport'],
+                              pweight=data['pweight'],
+                              ppayment=data['ppayment'],
+                              pdeliver=deliver,
+                              preceiver=receiver,
+                              ptime=datetime.datetime.now()
+                              )
+            p.save()
+            user = UserProfile.objects.get(username=request.user)
+            print user, p
+            u = UserParcelInfo(user=user, parcel=p)
+            u.save()
+            message = 'save success'
+    else:
+        print 'error'
+        form = ParcelForm()
+    return render_to_response('test.html', locals())

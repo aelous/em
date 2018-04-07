@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
 {% block nav %}
 
 <div class="navbar">
@@ -50,8 +49,6 @@
                             class="">批量导入</span></a></li>
                     <li><a class="ajax-link" href="{% url 'settle' %}"><i class="icon-home"></i><span
                             class="">结算信息</span></a></li>
-                    <li><a class="ajax-link" href="#" target="_blank"><i class="icon-eye-open"></i><span
-                            class="">用户管理</span></a></li>
                     {% endif %}
                     <li><a class="ajax-link" href="{% url 'complete' %}"><i class="icon-eye-open"></i><span
                             class="">个人中心</span></a></li>

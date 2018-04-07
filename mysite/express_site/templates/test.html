@@ -45,47 +45,54 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="sideNav" style="width:200px;top:-10px;float:left;">
+    <div class="sideNav">
         <!--<div class="col-sm-3 col-md-2 sidebar">-->
-        <!--<div class="col-sm-3 col-md-2 sidebar">-->
-            <ul class="nav nav nav-list">
-                <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
-                <a href="{% url 'parcel'%}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right" title="" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAH5SURBVEhL7ZQ/LwRRFMXPUtGgERIavUJQCTqfwDYiEWJnZ3ZRaGg2Cg2lQiXR+Ab+FKLwAZYGhdVLBEGCiOBd5z0zm9nNzO7MLp1JJjv75t3fuXPufRf4g0ssWOKg/1fRKo0hZWGP941kIBRprluAoA4CJwkvyDyEv2f8f69S2KkLrmbRRdCRpJmpexO6QIFXWqOzb4ktoMbRREiOkAvlQBXBDq4oZnP9Xa/xuRAZLkk0MmCAwVsqi0+TnZe1TVgK+8w2qe0x63rNwmZVAQESDHa4+cVvQ/GZReT7WQpnSkR1HWhfoICBWhhh0C5BTyWB/qwtPJoapLFavodrp6HZ09djyfos8BXQZE57mMCBBhC0HbRX2ZgIFZCFCnBdPBszOpien2ivg6xjkt3hX8BDYg5IWeYMuqbfvW7m+VC4hfOqxaUFWd7PPkuORJCQKbTSlsvAgnv2ORitKmAsABoIy+t5YrK20U7Rj1C4ti+Nu0jw8k20Z5DB95Xg7uEyxY99MXiNAm8VBdh5rNFYZLhMo4eWrHvT0LXoIUxEz5/IcLcNl70eZ/Ah+7/H1MLCYmDvZ5CLJUDQUvGE6tnCk+0BtBjfn/tblV/YV7MA4bdBwVzfcAfbl6ygIZ4A57rM/bQeM24LC+Y8GmZxO2PBvc2RRm5N5P+gAAe+AXJa+wp79HCiAAAAAElFTkSuQmCC" ><span class="menu-text"> 寄件 </span></a>
-                </li>
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Reports</a></li>
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Export</a></li>
             </ul>
-
-        <!--</div>-->
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item</a></li>
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+                <li><a href="">More navigation</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">Nav item again</a></li>
+                <li><a href="">One more nav</a></li>
+                <li><a href="">Another nav item</a></li>
+            </ul>
+        </div>
 
     </div>
     <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
     <div class="main">
-        <div class="root" style="min-height:800px;">
-            {% block contents %}
-            {% endblock %}
+        {% block contents %}
+        {% endblock %}
+        <h1 class="page-header">Dashboard</h1>
+        <div class="panel panel-default">
+            <div class="panel-heading">寄件人信息</div>
+            <div class="panel-body">
+                <form role="form" method="post">
+                    {{ form.non_field_errors }}
+                    <div class="form-group">
+                        <label for="{{ form.deliver_name.id_for_label }}"> test: *</label>
+                        <input type="text" class="form-control billSimple-text" size="80" name="deliver_name2"
+                               placeholder="请输入名称">
+                    </div>
+                    <div class="form-group">
+                        {{form.deliver_name.error}}
+                        <label for="{{ form.deliver_name.id_for_label }}"> {{form.deliver_name.label}}: *</label>
+                        {{form.deliver_name}}
+                    </div>
+                    <button type="submit" class="btn btn-default">提交</button>
+                </form>
+            </div>
         </div>
-        <!--<h1 class="page-header">Dashboard</h1>-->
-        <!--<div class="panel panel-default">-->
-        <!--<div class="panel-heading">寄件人信息</div>-->
-        <!--<div class="panel-body">-->
-        <!--<form role="form" method="post">-->
-        <!--{{ form.non_field_errors }}-->
-        <!--<div class="form-group">-->
-        <!--<label for="{{ form.deliver_name.id_for_label }}"> test: *</label>-->
-        <!--<input type="text" class="form-control billSimple-text" size="80" name="deliver_name2"-->
-        <!--placeholder="请输入名称">-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-        <!--{{form.deliver_name.error}}-->
-        <!--<label for="{{ form.deliver_name.id_for_label }}"> {{form.deliver_name.label}}: *</label>-->
-        <!--{{form.deliver_name}}-->
-        <!--</div>-->
-        <!--<button type="submit" class="btn btn-default">提交</button>-->
-        <!--</form>-->
-        <!--</div>-->
-        <!--</div>-->
 
     </div>
 </div>
