@@ -96,8 +96,9 @@ def complete(request):
     return render_to_response('complete.html', locals())
 
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def parcel(request):
+    info = ExpressProfile.objects.all()
     if request.method == 'POST':
         form = ParcelForm(request.POST)
         if form.is_valid():
@@ -161,13 +162,13 @@ def upload(request):
 
                 for i in range(1, nrows):
                     deliver = ExpressProfile(username=unicode(table.cell(i, 0).value),
-                                             phone=unicode(table.cell(i, 1).value),
+                                             phone=int(table.cell(i, 1).value),
                                              area=unicode(table.cell(i, 2).value),
                                              address=unicode(table.cell(i, 3).value)
                                              )
                     deliver.save()
                     receiver = ExpressProfile(username=unicode(table.cell(i, 4).value),
-                                              phone=unicode(table.cell(i, 5).value),
+                                              phone=int(table.cell(i, 5).value),
                                               area=unicode(table.cell(i, 6).value),
                                               address=unicode(table.cell(i, 7).value)
                                               )
@@ -240,6 +241,7 @@ def search(request):
 @login_required(login_url='login')
 def settle(request):
     info = ParcelProfile.objects.all()
+    company = [i[0] for i in express_company]
     return render_to_response('settle.html', locals())
 
 def test(request):

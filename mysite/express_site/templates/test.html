@@ -17,87 +17,61 @@
 </head>
 
 <body>
+<h2>模态框（Modal）插件方法</h2>
+<!-- 按钮触发模态框 -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	开始演示模态框
+</button>
 <!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
-<nav class="navbar navbar-static-top" style="margin-bottom:0;background-color:cadetblue;border-bottom:0;">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><span style="color:#fff;font-weight:600;">物流管理系统 </span></a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					寄件人地址
+				</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered table-striped lht-table table-hover">
+                    <thead>
+                    <tr>
+                        <th><span>姓名</span></th>
+                    </tr>
+                    <tr>
+                        <th><span>电话</span></th>
+                    </tr>
+                    <tr>
+                        <th><span>地址</span></th>
+                    </tr>
+                    <tr>
+                        <th><span>操作</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-<div class="container-fluid">
-    <div class="sideNav">
-        <!--<div class="col-sm-3 col-md-2 sidebar">-->
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Export</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">Nav item</a></li>
-                <li><a href="">Nav item again</a></li>
-                <li><a href="">One more nav</a></li>
-                <li><a href="">Another nav item</a></li>
-                <li><a href="">More navigation</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">Nav item again</a></li>
-                <li><a href="">One more nav</a></li>
-                <li><a href="">Another nav item</a></li>
-            </ul>
-        </div>
+                    </tbody>
+                </table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"
+						data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-    </div>
-    <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
-    <div class="main">
-        {% block contents %}
-        {% endblock %}
-        <h1 class="page-header">Dashboard</h1>
-        <div class="panel panel-default">
-            <div class="panel-heading">寄件人信息</div>
-            <div class="panel-body">
-                <form role="form" method="post">
-                    {{ form.non_field_errors }}
-                    <div class="form-group">
-                        <label for="{{ form.deliver_name.id_for_label }}"> test: *</label>
-                        <input type="text" class="form-control billSimple-text" size="80" name="deliver_name2"
-                               placeholder="请输入名称">
-                    </div>
-                    <div class="form-group">
-                        {{form.deliver_name.error}}
-                        <label for="{{ form.deliver_name.id_for_label }}"> {{form.deliver_name.label}}: *</label>
-                        {{form.deliver_name}}
-                    </div>
-                    <button type="submit" class="btn btn-default">提交</button>
-                </form>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
+<script>
+$(function () { $('#myModal').modal({
+	keyboard: true
+})});
+</script>
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->

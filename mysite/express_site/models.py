@@ -3,21 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User, AbstractUser
 from django.db import models
-
-express_company = (('顺丰(需要审批流)', '顺丰(需要审批流)'),
-                   ('圆通', '圆通'),
-                   ('中通', '中通'),
-                   ('百世汇丰', '百世汇丰'),
-                   ('EMS', 'EMS'),
-                   ('申通', '申通'),
-                   ('韵达', '韵达'),
-                   ('京东', '京东'),
-                   ('优速', '优速'),
-                   ('德邦', '德邦'),
-                   ('天天', '天天'),
-                   ('国通', '国通'),
-                   ('宅急送', '宅急送'),
-                   )
+from util import *
 
 
 # Create your models here.

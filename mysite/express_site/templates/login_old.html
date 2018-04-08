@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block contents %}
+{% if status %}
+{% bootstrap_alert "用户名或密码错误" alert_type='danger' %}
+{% else %}
+{% bootstrap_alert message alert_type='success' %}
+{% endif %}
+
+    <form role="form" method="post">
+        {% bootstrap_form form %}
+        {% buttons submit='Login'%}{% endbuttons %}
+    </form>
+    <a href="{% url 'register'%}">注册</a>
+{% endblock %}

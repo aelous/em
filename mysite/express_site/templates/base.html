@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Bootstrap 101 Template</title>
+    <title>物流管理系统</title>
 
     <!-- Bootstrap -->
     <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
@@ -48,14 +48,36 @@
     <div class="sideNav" style="width:200px;top:-10px;float:left;">
         <!--<div class="col-sm-3 col-md-2 sidebar">-->
         <!--<div class="col-sm-3 col-md-2 sidebar">-->
-            <ul class="nav nav nav-list">
-                <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
-                <a href="{% url 'parcel'%}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right" title="" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAH5SURBVEhL7ZQ/LwRRFMXPUtGgERIavUJQCTqfwDYiEWJnZ3ZRaGg2Cg2lQiXR+Ab+FKLwAZYGhdVLBEGCiOBd5z0zm9nNzO7MLp1JJjv75t3fuXPufRf4g0ssWOKg/1fRKo0hZWGP941kIBRprluAoA4CJwkvyDyEv2f8f69S2KkLrmbRRdCRpJmpexO6QIFXWqOzb4ktoMbRREiOkAvlQBXBDq4oZnP9Xa/xuRAZLkk0MmCAwVsqi0+TnZe1TVgK+8w2qe0x63rNwmZVAQESDHa4+cVvQ/GZReT7WQpnSkR1HWhfoICBWhhh0C5BTyWB/qwtPJoapLFavodrp6HZ09djyfos8BXQZE57mMCBBhC0HbRX2ZgIFZCFCnBdPBszOpien2ivg6xjkt3hX8BDYg5IWeYMuqbfvW7m+VC4hfOqxaUFWd7PPkuORJCQKbTSlsvAgnv2ORitKmAsABoIy+t5YrK20U7Rj1C4ti+Nu0jw8k20Z5DB95Xg7uEyxY99MXiNAm8VBdh5rNFYZLhMo4eWrHvT0LXoIUxEz5/IcLcNl70eZ/Ah+7/H1MLCYmDvZ5CLJUDQUvGE6tnCk+0BtBjfn/tblV/YV7MA4bdBwVzfcAfbl6ygIZ4A57rM/bQeM24LC+Y8GmZxO2PBvc2RRm5N5P+gAAe+AXJa+wp79HCiAAAAAElFTkSuQmCC" ><span class="menu-text"> 寄件 </span></a>
-                </li>
-                <li><a href="#">Reports</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Export</a></li>
-            </ul>
+        <ul class="nav nav nav-list">
+            <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
+                <a href="{% url 'parcel'%}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right" title=""><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAH5SURBVEhL7ZQ/LwRRFMXPUtGgERIavUJQCTqfwDYiEWJnZ3ZRaGg2Cg2lQiXR+Ab+FKLwAZYGhdVLBEGCiOBd5z0zm9nNzO7MLp1JJjv75t3fuXPufRf4g0ssWOKg/1fRKo0hZWGP941kIBRprluAoA4CJwkvyDyEv2f8f69S2KkLrmbRRdCRpJmpexO6QIFXWqOzb4ktoMbRREiOkAvlQBXBDq4oZnP9Xa/xuRAZLkk0MmCAwVsqi0+TnZe1TVgK+8w2qe0x63rNwmZVAQESDHa4+cVvQ/GZReT7WQpnSkR1HWhfoICBWhhh0C5BTyWB/qwtPJoapLFavodrp6HZ09djyfos8BXQZE57mMCBBhC0HbRX2ZgIFZCFCnBdPBszOpien2ivg6xjkt3hX8BDYg5IWeYMuqbfvW7m+VC4hfOqxaUFWd7PPkuORJCQKbTSlsvAgnv2ORitKmAsABoIy+t5YrK20U7Rj1C4ti+Nu0jw8k20Z5DB95Xg7uEyxY99MXiNAm8VBdh5rNFYZLhMo4eWrHvT0LXoIUxEz5/IcLcNl70eZ/Ah+7/H1MLCYmDvZ5CLJUDQUvGE6tnCk+0BtBjfn/tblV/YV7MA4bdBwVzfcAfbl6ygIZ4A57rM/bQeM24LC+Y8GmZxO2PBvc2RRm5N5P+gAAe+AXJa+wp79HCiAAAAAElFTkSuQmCC"><span
+                        class="menu-text"> 寄件 </span></a>
+            </li>
+            <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
+                <a href="{% url 'search'%}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right" title=""><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFCSURBVEhL5VVLbsJQDHS6KDdDVRdF9BQsegAkKiohrtEFWwppED/BvjdACC4TdyZKIiCB2LCgUiN58Z7HHv+eE0jFF4fSCVT6hzAN5OPhVXpVtia9rkR1fCK4MxlnIN3IYzyWp3gkz4i4wXtGrms4HpUQ8A46YlJsI7Glj4XUCuRQfGqYOoIhAYWoT7NIzwmWgfAMHyAalBFEucOMICM84zhzeEQALIKdmwgAXOkUUV0QRLu+msDTxLxEpgwmSS2HyCCyCLFKm7SU1SW6VHOD7g8QsKkcO4/MHCXCZLx5Gpw8tC9p/aMeoER7TMKU02AUYnfmEmGBvXt7gIXYNhNohIngVHiENuaHxldZsYMK+m8HAUau7i0R+tY1Z4CG/Vh2UI4JJQTB1kxg/dGcw91tF73o0rl/ynYVfCCDpreHN+F/ASEFwH6ybhWPAAAAAElFTkSuQmCC"><span
+                        class="menu-text"> 寄件信息查询 </span></a>
+            </li>
+            {% if request.user.is_admin %}
+            <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
+                <a href="{% url 'upload'%}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right" title=""><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAG+SURBVEhL7ZW/S8NQEMdf6aSgi0vBXRwEJxUp4o9JQf8CwcE/QhBx9U9wtiaxRUsraGstWnRRcRUVipuDVoTie0kqaZLzXmObxGqbpG568Ah5P+5zd9+8S4hwk+gRCYVnCZi11yYDAGKGImSp5+X7De1mkwYQibUeO/J9Ozc/r+/pHgAK7qH5YBAvAJ5hXAUisk3/EK+AGqQChO9vNURadAfhB9BOq/q6i/A3ASJFPRiM5lSYK6gwkVehexc1EnCel6nTEg1kFDBMvIFfbPn63QIk2JDN8KnByLGKbm3vrOqmLF7ilybKV4EBp696w+PKrQZdGPEDM1yU8CG2l+3yjAXxmUHVtKJfvdEg9WRAFDMiGRWK1IZMF7BUjUvpE8Cds6oJsUcrk7GcUnvmS3Zm82dYJontB8pARudOqwOcc+MnGgdsBAKknu1InRnUATrySZprIA9/Ajy0a0eL6E3K4Mzi3CG6jvoMZrHzxisp+yuS6Dq24iwRacbTkNhdJK3BAdZc4eGiaajvRVmHyQKWRqQlsqX0+++6zhMCXWv6SSW4sLLQmWPn6dhbH0YbJZKyQAQ21XnUvxfavye7Ah/Iq+ejDg8sfwAAAABJRU5ErkJggg=="><span
+                        class="menu-text"> 批量导入 </span></a>
+            </li>
+            <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
+                <a href="{% url 'settle'%}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right" title=""><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAH5SURBVEhL7ZQ/LwRRFMXPUtGgERIavUJQCTqfwDYiEWJnZ3ZRaGg2Cg2lQiXR+Ab+FKLwAZYGhdVLBEGCiOBd5z0zm9nNzO7MLp1JJjv75t3fuXPufRf4g0ssWOKg/1fRKo0hZWGP941kIBRprluAoA4CJwkvyDyEv2f8f69S2KkLrmbRRdCRpJmpexO6QIFXWqOzb4ktoMbRREiOkAvlQBXBDq4oZnP9Xa/xuRAZLkk0MmCAwVsqi0+TnZe1TVgK+8w2qe0x63rNwmZVAQESDHa4+cVvQ/GZReT7WQpnSkR1HWhfoICBWhhh0C5BTyWB/qwtPJoapLFavodrp6HZ09djyfos8BXQZE57mMCBBhC0HbRX2ZgIFZCFCnBdPBszOpien2ivg6xjkt3hX8BDYg5IWeYMuqbfvW7m+VC4hfOqxaUFWd7PPkuORJCQKbTSlsvAgnv2ORitKmAsABoIy+t5YrK20U7Rj1C4ti+Nu0jw8k20Z5DB95Xg7uEyxY99MXiNAm8VBdh5rNFYZLhMo4eWrHvT0LXoIUxEz5/IcLcNl70eZ/Ah+7/H1MLCYmDvZ5CLJUDQUvGE6tnCk+0BtBjfn/tblV/YV7MA4bdBwVzfcAfbl6ygIZ4A57rM/bQeM24LC+Y8GmZxO2PBvc2RRm5N5P+gAAe+AXJa+wp79HCiAAAAAElFTkSuQmCC"><span
+                        class="menu-text"> 结算信息 </span></a>
+            </li>
+             {% endif %}
+            <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
+                <a href="{% url 'complete'%}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right" title=""><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAL9SURBVEhLlVVNaBNBFJ6WUusfRRD0UCyKJDuzaS+xO7NpIYooPYj4AxVP6rGIFwVBPFTvPXuxHgsei4eieChatdSDqIdaBC1Uioi0u7NJGtvajt8kNG42k2y6sGyy89773vve9962kJhrJX2ss7WtYxhm51sISSlC2nEvtZKtKUJaHnfOfpmNi2E8l4Jd8zidV/0pFQg2g98Pfce6GnD7si+StySn43ivCoJJ6bKxrUxyf1NAQTZ9MCfYpC/ouu/QUZXN7mvkGDj0gs/ZzM8zvXtjAZbS6T3IbAUOH2ONd2rwq48d1sElt8Z26tuUfcFlkwj+AQ1EL2uvopM46rn0tC/Y4O9M8sRCtrujXmDp2ucCN2FVziVnNzTnJgf0oM3n9A36otD40E3zgZv6HyTkjHgv4fOu8ion6Fwg6KgJIICSaoOXgQqurTzHPhX1+zp4fBfUpWTGconWuZai6s7WlAzKxusFr1TD6YYxMa1Ebk0QcHoP94zJqNT0GmqqqVrVVQj7btQfNF2H7wLRGgbASNRADRw5sJaxI7xH+1D+jyF8EfUvOD1diL1JYCD1hNZk0GclmgVAtq9MDGyBelBE1/T4mwxyIr4CvS48YT01KnCgRxGPs285l900Gay67FNcD7RAltOJ/qj/oujaXUR/iHStMb24TACeSF1cy5h518A6+4CzZ8bquX0ScZeJdCyhjetOJYbQVIUOLgX9oRhrNypQWI8q6gRSIeDWpXogvsNG9FCFgdC776q7wboAOObodikm5PQEu+hzGCCP5efx5IO8oH/XIVdkUwWgB1DzryUqeS8P+3oQjT6vSrgkSdBRAhR0KK654fPStHM6O5UlbTmeOqTPsH6GqgDyjnVWgyCj503rP1RVCcShc3i+R2+mjXRjA95HJhtSWPmdVLBtqycXLFRRXQMEkOE/kYY2DcbZ63pCqXovsSbwPZ7eLH/wG+6jossUKJVI7IpCD5oC2DbSM4KyJ3DPl7/VdANq2sSzAJ4X8XyLTXCnUdB/zymQbrzUMwEAAAAASUVORK5CYII="><span
+                        class="menu-text"> 个人中心 </span></a>
+            </li>
+            <li><a href="{% url 'logout'%}"><i class="icon-lock"></i><span class=""> 登出</span></a></li>
+        </ul>
 
         <!--</div>-->
 

@@ -1,21 +1,270 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录-物流管理系统</title>
+    <script src="" id="sc"></script>
+    <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
 
-{% load bootstrap3 %}
+    <!--<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">-->
+    <link href="{% static 'css/commons.css' %}" rel="stylesheet">
+    <style type="text/css">
+		body
+		{
+			font-family: "Microsoft Yahei";
+			line-height: 1.5;
+			font-size: 14px;
+			color: #333;
+		}
+		span {
+		    border: 1px solid #ddd;
+		    text-align: center;
+		    width: 38px;
+		    height: 36px;
+		    line-height: 38px;
+		    display: inline-block;
+		    vertical-align: bottom;
+		}
+		a {
+		    color: #08c;
+		    text-decoration: none;
+		}
+		button, input, select, textarea {
+		    font: inherit;
+		    margin: 0;
+		}
+		.inputText {
+		    border: 1px solid #ddd;
+		    border-left-width: 0;
+		    width: 250px;
+		    padding: 4px 2px 4px 10px;
+		    box-sizing: border-box;
+		    height: 40px;
+		    line-height: 30px;
+		    outline: 0;
+		    color: #666;
+		    overflow: visible;
+		    font: inherit;
+		    margin: 0;
+		}
+		.loginHeader .logo {
+		    margin-top: 30px;
+		    height: 50px;
+		    width: 107px;
+		    cursor: pointer;
+		    margin-right: 30px;
+		}
+		.float {
+		    float: left;
+		}
+		.clearfix:after {
+		    content: "";
+		    display: table;
+		    clear: both;
+		    zoom: 1;
+		}
+		.container {
+		    width: 1200px;
+		    margin-left: auto;
+		    margin-right: auto;
+		}
+		.logo {
+		    margin-top: 7px;
+		    height: 50px;
+		    cursor: pointer;
+		    margin-right: 110px;
+		}
+		.textTitle {
+		    margin-top: 55px;
+		    font-size: 18px;
+		    width: 735px;
+		}
+		.dcrc {
+		    height: 90px;
+		    cursor: pointer;
+		    position: relative;
+		    right: -44px;
+		    top: 20px;
+		}
+		.loginForm {
+		    background-color: rgb(255, 255, 255);
+		    width: 350px;
+		    height: 380px;
+		    margin-top: 60px;
+		    box-sizing: border-box;
+		    padding: 24px 25px;
+		}
+		.loginTitle {
+		    height: 24px;
+		    line-height: 24px;
+		}
+		.errorTitle {
+		    height: 24px;
+		    line-height: 24px;
+		}
+		.message {
+		  width: 300px;
+		  background-color: #fff;
+		  border: 2px solid #fff;
+		  color: #999999;
+		}
+		input[type='checkbox'] {
+			width: 20px;
+			height: 20px;
+			margin-left: 0;
+		  	content: url(images/login-6.png);
+		}
+		input[type=checkbox]:checked {
+        	content: url(images/login-7.png);
+		}
+		.submit {
+		    border: none;
+		    background-color: rgb(40,185,239);
+		    width: 300px;
+		    height: 42px;
+		    color: #fff;
+		    border-radius: 3px;
+		    font-size: 18px;
+		}
+		.footer {
+			width:100%;
+			height:35px;
+			line-height:35px;
+			position:relative;
+			bottom:0px;
+			left:0px;
+			font-size:18px;
+			text-align:center;
+			padding-bottom: 18px;
+			color: #999999;
+		}
+		.modal {
+			position: absolute;
+			background-color:  rgba(192,192,192,.5);
+			top:0;
+			width: 100%;
+			height: 100%;
+			z-index: 10001;
+			display: none;
+		}
+		.modalContent {
+			width: 380px;
+			height: 170px;
+			background-color: #fff;
+			margin:auto;
+			margin-top:15%;
+		}
+		.modalTitle {
+			height: 30px;
+			background-color: rgb(40,185,239);
+			color: #fff;
+			font-size: 18px;
+			padding: 5px 10px;
 
-{% block title %}
-    Login
-{% endblock %}
+		}
+		.modalBody {
+			height: 60px;
+			padding: 10px 10px;
+		}
+		.modalFoot {
 
-{% block content %}
-{% if status %}
-{% bootstrap_alert "用户名或密码错误" alert_type='danger' %}
-{% else %}
-{% bootstrap_alert message alert_type='success' %}
-{% endif %}
+		}
+		.modalFootBtn {
+			float: right;
+			margin-right: 10px;
+			border: none;
+		    background-color: rgb(192,192,192);
+		    width: 80px;
+		    height: 40px;
+		    color: #fff;
+		    border-radius: 3px;
+		    font-size: 18px;
+		}
 
-    <form role="form" method="post">
-        {% bootstrap_form form %}
-        {% buttons submit='Login'%}{% endbuttons %}
-    </form>
-    <a href="{% url 'register'%}">注册</a>
-{% endblock %}
+
+
+    </style>
+</head>
+<body>
+<div style="min-height:670px;min-width:1200px">
+    <div style="margin-bottom:200px">
+        <div class="container clearfix">
+            <div class="float logo">
+                <h4>物流管理系统</h4><!--<img src="images/56laile.png"/>-->
+            </div>
+            <div class="float textTitle"><b>登录</b></div>
+            <div class="float dcrc"><img src="{% static 'images/server.png' %}"/></div>
+        </div>
+        <div class="clearfix" style="height:500px;background-color:rgb(40,185,239)">
+            <div class="container" style="height:500px">
+                <div class="float" style="width:710px;margin-right:70px;">
+                    <img style="width:710px;height:500px" src="{% static 'images/G20.png' %}"/>
+                </div>
+                <div class="float">
+                    <form role="form" method="post" class="loginForm">
+                        <div class="clearfix loginTitle" style="margin-bottom:6px">
+                            <img class="float" src="{% static 'images/login-1.png' %}" style="margin-right:12px">
+                            <b>请输入用户信息</b>
+                        </div>
+                        <div class="clearfix errorTitle" id="error" style="margin-bottom:6px;color:red">
+
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom:20px">
+								<span class="float" style="font-size:18px;padding-top:2px">
+									<img src="{% static 'images/login-5.png' %}">
+								</span>
+                            <h4>用户名</h4>
+                            {{form.username.error}}
+                            {{form.username}}
+                            <!--<input class="inputText" type="text" name="" id="userName" placeholder="请输入用户名">-->
+                        </div>
+                        <div class="clearfix" style="margin-bottom:20px">
+								<span class="float" style="font-size:18px;padding-top:2px">
+									<img src="{% static 'images/login-3.png' %}">
+								</span>
+                            <h4>密码</h4>
+
+                            {{form.password.error}}
+                            {{form.password}}
+                            <!--<input class="inputText" type="password" name="" id="userPassword" placeholder="请输入登录密码">-->
+                        </div>
+                        <div class="clearfix message" style="margin-bottom:20px;font-size:12px">
+                            <label style="margin-right:6px">
+                                <input class="float" type="checkbox" id="remember" name="remember" checked="checked">
+                            </label>
+                            记住我
+                            <a href="{% url 'register'%}" style="float:right;" >注册</a>
+                        </div>
+                        <div>
+                            <button class="submit" style="margin-bottom:20px" onclick="return _ajax_submit_callback()">登&nbsp;录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    物流管理系统 © 2018
+</div>
+<div class="modal" id="modal" onclick="return modalClose()">
+    <div class="modalContent">
+        <div class="modalTitle">
+            <b>忘记密码</b>
+        </div>
+        <div class="modalBody">
+            <a href="javascript:void(0);"> 主账号忘记密码请咨询QQ技术群中的盒子助手 </a><br/>
+            <a href="javascript:void(0);">子账号请咨询主账号管理员</a>
+            <a href="javascript:void(0);">QQ技术群：492433063</a><br/>
+            <a href="javascript:void(0);" onclick="return copyQQ()"> 点击复制QQ群号</a>
+        </div>
+        <div class="modalFoot">
+            <button class="modalFootBtn">关闭</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
