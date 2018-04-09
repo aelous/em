@@ -1,177 +1,293 @@
 {% extends 'base.html' %}
 
 {% block contents %}
-<div class="clearfix">
-    <div class="page-content">
-        <form role="form" method="post">
-            <div class="mgb6">
-                <h4><span class="label label-primary arrowed-in-right label-lg float mgr6"><b>寄件人地址</b></span></h4>
-                <div class="switch-check"><label class="switch-bg"><input type="checkbox" class="not-empty" name="switch"><span></span></label></div>
-                <a class="mgr4" href="javascript:void(0);">[选择历史寄件人]</a>
-            </div>
-            <div class="panel panel-default panelBody">
-                <div class="panel-body ">
-                    <div class="mgb6 pos-relative">
+    <div class="clearfix">
+        <div class="page-content">
+            <form role="form" method="post">
+                <div class="mgb6">
+                    <h4><span class="label label-primary arrowed-in-right label-lg float mgr6"><b>寄件人地址</b></span></h4>
+                    <div class="switch-check"><label class="switch-bg"><input type="checkbox" class="not-empty"
+                                                                              name="switch"><span></span></label></div>
+                    <a class="mgr4" href="javascript:void(0);" id="deliver_model">[选择历史寄件人]</a>
+
+                </div>
+                <div class="panel panel-default panelBody">
+                    <div class="panel-body ">
+                        <div class="mgb6 pos-relative">
                         <span>
-                        {{form.deliver_name.error}}
+                        {{ form.deliver_name.error }}
                         <label for="{{ form.deliver_name.id_for_label }}">
-                            {{form.deliver_name.label}}:* </label>
-                        {{form.deliver_name}}
+                            {{ form.deliver_name.label }}:* </label>
+                        {{ form.deliver_name }}
                         </span>
-                    </div>
-                    <div class="mgb6 pos-relative">
+                        </div>
+                        <div class="mgb6 pos-relative">
                         <span>
-                    {{form.deliver_phone.error}}
+                    {{ form.deliver_phone.error }}
                     <label for="{{ form.deliver_phone.id_for_label }}">
-                        {{form.deliver_phone.label}}:* </label>
-                    {{form.deliver_phone}}
+                        {{ form.deliver_phone.label }}:* </label>
+                    {{ form.deliver_phone }}
 </span>
-                    </div>
-                    <div class="mgb6 pos-relative">
+                        </div>
+                        <div class="mgb6 pos-relative">
                         <span>
-                    {{form.deliver_area.error}}
+                    {{ form.deliver_area.error }}
                     <label for="{{ form.deliver_area.id_for_label }}">
-                        {{form.deliver_area.label}}:* </label>
-                    {{form.deliver_area}}
+                        {{ form.deliver_area.label }}:* </label>
+                    {{ form.deliver_area }}
 </span>
-                    </div>
-                    <div class="mgb6 pos-relative">
+                        </div>
+                        <div class="mgb6 pos-relative">
                         <span>
-                    {{form.deliver_address.error}}
+                    {{ form.deliver_address.error }}
                     <label for="{{ form.deliver_address.id_for_label }}">
-                        {{form.deliver_address.label}}:* </label>
-                    {{form.deliver_address}}
+                        {{ form.deliver_address.label }}:* </label>
+                    {{ form.deliver_address }}
 </span>
-                    </div>
-                    <div class="mgb6 pos-relative">
+                        </div>
+                        <div class="mgb6 pos-relative">
                         <span>
-                    {{form.deliver_department.error}}
+                    {{ form.deliver_department.error }}
                     <label for="{{ form.deliver_department.id_for_label }}">
-                        {{form.deliver_department.label}}:* </label>
-                    {{form.deliver_department}}
+                        {{ form.deliver_department.label }}:* </label>
+                    {{ form.deliver_department }}
 </span>
-                    </div>
-                    <div class="mgb6 pos-relative">
+                        </div>
+                        <div class="mgb6 pos-relative">
                         <span>
-                    {{form.deliver_employee_id.error}}
+                    {{ form.deliver_employee_id.error }}
                     <label for="{{ form.deliver_employee_id.id_for_label }}">
-                        {{form.deliver_employee_id.label}}:* </label>
-                    {{form.deliver_employee_id}}
+                        {{ form.deliver_employee_id.label }}:* </label>
+                    {{ form.deliver_employee_id }}
 </span>
-                    </div>
-                    <div class="mgb6 pos-relative">
+                        </div>
+                        <div class="mgb6 pos-relative">
                         <span>
-                    {{form.deliver_is_getmsg.error}}
+                    {{ form.deliver_is_getmsg.error }}
                     <label for="{{ form.deliver_is_getmsg.id_for_label }}">
-                        {{form.deliver_is_getmsg.label}}:* </label>
-                    {{form.deliver_is_getmsg}}
+                        {{ form.deliver_is_getmsg.label }}:* </label>
+                    {{ form.deliver_is_getmsg }}
 </span>
-                    </div>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="mgb6">
-                <h4><span class="label label-success arrowed-in-right label-lg float mgr6"><b>收件人地址</b></span></h4>
-                <div class="switch-check"><label class="switch-bg"><input type="checkbox" class="not-empty" name="switch"><span></span></label></div>
-                <a class="mgr4" href="javascript:void(0);">[选择历史收件人]</a>
-            </div>
-            <div class="panel panel-default panelBody">
-                <div class="panel-body">
-                    <div class="form-group">
-                        {{form.receiver_name.error}}
-                        <label for="{{ form.receiver_name.id_for_label }}">
-                            {{form.receiver_name.label}}:* </label>
-                        {{form.receiver_name}}
-                    </div>
-                    <div class="form-group">
-                        {{form.receiver_phone.error}}
-                        <label for="{{ form.receiver_phone.id_for_label }}">
-                            {{form.receiver_phone.label}}:* </label>
-                        {{form.receiver_phone}}
-                    </div>
-                    <div class="form-group">
-                        {{form.receiver_area.error}}
-                        <label for="{{ form.receiver_area.id_for_label }}">
-                            {{form.receiver_area.label}}:* </label>
-                        {{form.receiver_area}}
-                    </div>
-                    <div class="form-group">
-                        {{form.receiver_address.error}}
-                        <label for="{{ form.receiver_address.id_for_label }}">
-                            {{form.receiver_address.label}}:* </label>
-                        {{form.receiver_address}}
-                    </div>
-                    <div class="form-group">
-                        {{form.receiver_is_getmsg.error}}
-                        <label for="{{ form.receiver_is_getmsg.id_for_label }}">
-                            {{form.receiver_is_getmsg.label}}:* </label>
-                        {{form.receiver_is_getmsg}}
-                    </div>
-
+                <div class="mgb6">
+                    <h4><span class="label label-success arrowed-in-right label-lg float mgr6"><b>收件人地址</b></span></h4>
+                    <div class="switch-check"><label class="switch-bg"><input type="checkbox" class="not-empty"
+                                                                              name="switch"><span></span></label></div>
+                    <a class="mgr4" href="javascript:void(0);" id="receiver_model">[选择历史收件人]</a>
                 </div>
-            </div>
+                <div class="panel panel-default panelBody">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            {{ form.receiver_name.error }}
+                            <label for="{{ form.receiver_name.id_for_label }}">
+                                {{ form.receiver_name.label }}:* </label>
+                            {{ form.receiver_name }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.receiver_phone.error }}
+                            <label for="{{ form.receiver_phone.id_for_label }}">
+                                {{ form.receiver_phone.label }}:* </label>
+                            {{ form.receiver_phone }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.receiver_area.error }}
+                            <label for="{{ form.receiver_area.id_for_label }}">
+                                {{ form.receiver_area.label }}:* </label>
+                            {{ form.receiver_area }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.receiver_address.error }}
+                            <label for="{{ form.receiver_address.id_for_label }}">
+                                {{ form.receiver_address.label }}:* </label>
+                            {{ form.receiver_address }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.receiver_is_getmsg.error }}
+                            <label for="{{ form.receiver_is_getmsg.id_for_label }}">
+                                {{ form.receiver_is_getmsg.label }}:* </label>
+                            {{ form.receiver_is_getmsg }}
+                        </div>
 
-            <div class="mgb6">
-                <h4><span class="label label-default arrowed-in-right label-lg float mgr6"><b>其它信息</b></span></h4>
-                <div class="switch-check"><label class="switch-bg"><span></span></label></div>
-                <a class="mgr4" href="javascript:void(0);"></a>
-            </div>
-            <div class="panel panel-default panelBody">
-                <div class="panel-body">
-                    <div class="form-group">
-                        {{form.pname.error}}
-                        <label for="{{ form.pname.id_for_label }}">
-                            {{form.pname.label}}:* </label>
-                        {{form.pname}}
                     </div>
-                    <div class="form-group">
-                        {{form.pinfo.error}}
-                        <label for="{{ form.pinfo.id_for_label }}">
-                            {{form.pinfo.label}}:* </label>
-                        {{form.pinfo}}
-                    </div>
-                    <div class="form-group">
-                        {{form.pweight.error}}
-                        <label for="{{ form.pweight.id_for_label }}">
-                            {{form.pweight.label}}:* </label>
-                        {{form.pweight}}
-                    </div>
-                    <div class="form-group">
-                        {{form.ppayment.error}}
-                        <label for="{{ form.ppayment.id_for_label }}">
-                            {{form.ppayment.label}}:* </label>
-                        {{form.ppayment}}
-                    </div>
-                    <div class="form-group">
-                        {{form.psupport.error}}
-                        <label for="{{ form.psupport.id_for_label }}">
-                            {{form.psupport.label}}:* </label>
-                        {{form.psupport}}
-                    </div>
-                    <div class="form-group">
-                        {{form.psupport_value.error}}
-                        <label for="{{ form.psupport_value.id_for_label }}">
-                            {{form.psupport_value.label}}:* </label>
-                        {{form.psupport_value}}
-                    </div>
-                    <div class="form-group">
-                        {{form.remark.error}}
-                        <label for="{{ form.remark.id_for_label }}">
-                            {{form.remark.label}}:* </label>
-                        {{form.remark}}
-                    </div>
-
                 </div>
-            </div>
-            <button type="submit" class="btn btn-default">提交</button>
-        </form>
+
+                <div class="mgb6">
+                    <h4><span class="label label-default arrowed-in-right label-lg float mgr6"><b>其它信息</b></span></h4>
+                    <div class="switch-check"><label class="switch-bg"><span></span></label></div>
+                    <a class="mgr4" href="javascript:void(0);"></a>
+                </div>
+                <div class="panel panel-default panelBody">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            {{ form.pname.error }}
+                            <label for="{{ form.pname.id_for_label }}">
+                                {{ form.pname.label }}:* </label>
+                            {{ form.pname }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.pinfo.error }}
+                            <label for="{{ form.pinfo.id_for_label }}">
+                                {{ form.pinfo.label }}:* </label>
+                            {{ form.pinfo }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.pweight.error }}
+                            <label for="{{ form.pweight.id_for_label }}">
+                                {{ form.pweight.label }}:* </label>
+                            {{ form.pweight }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.ppayment.error }}
+                            <label for="{{ form.ppayment.id_for_label }}">
+                                {{ form.ppayment.label }}:* </label>
+                            {{ form.ppayment }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.psupport.error }}
+                            <label for="{{ form.psupport.id_for_label }}">
+                                {{ form.psupport.label }}:* </label>
+                            {{ form.psupport }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.psupport_value.error }}
+                            <label for="{{ form.psupport_value.id_for_label }}">
+                                {{ form.psupport_value.label }}:* </label>
+                            {{ form.psupport_value }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.remark.error }}
+                            <label for="{{ form.remark.id_for_label }}">
+                                {{ form.remark.label }}:* </label>
+                            {{ form.remark }}
+                        </div>
+
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">提交</button>
+            </form>
+        </div>
+
     </div>
 
-</div>
+    <div class="modal fade" id="deliver_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        选择寄件人
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table hover" cellspacing="0" width="100%" id="deliver_table">
+                        <thead>
+                        <tr>
+                            <th><span>姓名</span></th>
+                            <th><span>电话</span></th>
+                            <th><span>地区</span></th>
+                            <th><span>地址</span></th>
+                            {#                            <th><span>操作</span></th>#}
+                        </tr>
+                        </thead>
+                        <tbody role="alert">
+                        {% for parcel in pdelivers %}
+                            <tr/>
+                            <td class=""> {{ parcel.username }}</td>
+                            <td class=""> {{ parcel.phone }}</td>
+                            <td class=""> {{ parcel.area }}</td>
+                            <td class=""> {{ parcel.address }}</td>
+                            {#                            <td class="">#}
+                            {#                                <div><a class="deliver_chose" style="color:#69aa46;margin:0 3px;cursor:pointer;">编辑</a></div>#}
+                            {#                            </td>#}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deliver_button" data-dismiss="modal">
+                        选择
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="clear"></div>
 
 
-<div class="clear"></div>
+{% endblock %}
+
+{% block extra_script %}
+    <script>
+        $(document).ready(function () {
+            $("#deliver_model").click(function () {
+                {#                alert('haha');#}
+                $('#deliver_Modal').modal({
+                    keyboard: true
+                })
+            });
+
+            {#            $(".deliver_chose").click(function () {#}
+            {#                var $row = $(this).closest("tr");         // Retrieves the text within <td>#}
+            {#                $tds = $row.find("td:nth-child(1)");#}
+            {#                var name = $row.find("td:nth-child(0)").text();#}
+            {#                var phone = $row.find("td:nth-child(1)").text();#}
+            {#                var area = $row.find("td:nth-child(2)").text();#}
+            {#                var address = $row.find("td:nth-child(3)").text();#}
+            {#                alert($tds.text());#}
+            {#                $("#resultas").append($item);       // Outputs the answer#}
+            {#            });#}
 
 
+        });
+        $(document).ready(function () {
+            var table = $('#deliver_table').DataTable();
+            {#            var name = $row.find("td:nth-child(0)").text();#}
+            {#            var phone = $row.find("td:nth-child(1)").text();#}
+            {#            var area = $row.find("td:nth-child(2)").text();#}
+            var name = null;
+            var phone = null;
+            var area = null;
+            var address = null;
+            $('#deliver_table').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    name = null;
+                    phone = null;
+                    area = null;
+                    address = null;
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    name = $(this).find("td:nth-child(1)").text();
+                    phone = $(this).find("td:nth-child(2)").text();
+                    area = $(this).find("td:nth-child(3)").text();
+                    address = $(this).find("td:nth-child(4)").text();
+
+
+                }
+            });
+
+            $('#deliver_button').click(function () {
+                if (area != null) {
+                    $('#id_deliver_name').val(name);
+                    $('#id_deliver_phone').val(phone);
+                    $('#id_deliver_area').val(area);
+                    $('#id_deliver_address').val(address);
+                }
+            })
+        });
+    </script>
 {% endblock %}

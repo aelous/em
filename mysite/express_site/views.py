@@ -98,7 +98,21 @@ def complete(request):
 
 @login_required(login_url='login')
 def parcel(request):
-    info = ExpressProfile.objects.all()
+    info = ParcelProfile.objects.all()
+    pdelivers_name = set()
+    preceiver_name = set()
+    for i in info:
+        pdelivers_name.add(i.pdeliver.username)
+        preceiver_name.add(i.preceiver.username)
+    pdelivers=[]
+    preceivers=[]
+
+    for i in pdelivers_name:
+        pdelivers.append(ExpressProfile.objects.filter(username=i)[0])
+
+    for i in preceiver_name:
+        preceivers.append(ExpressProfile.objects.filter(username=i)[0])
+
     if request.method == 'POST':
         form = ParcelForm(request.POST)
         if form.is_valid():
@@ -246,6 +260,21 @@ def settle(request):
 
 def test(request):
     print 'test'
+    info = ParcelProfile.objects.all()
+    pdelivers_name = set()
+    preceiver_name = set()
+    for i in info:
+        pdelivers_name.add(i.pdeliver.username)
+        preceiver_name.add(i.preceiver.username)
+    pdelivers=[]
+    preceivers=[]
+
+    for i in pdelivers_name:
+        pdelivers.append(ExpressProfile.objects.filter(username=i)[0])
+
+    for i in preceiver_name:
+        preceivers.append(ExpressProfile.objects.filter(username=i)[0])
+
     if request.method == 'POST':
         print 'post'
         print request.POST
