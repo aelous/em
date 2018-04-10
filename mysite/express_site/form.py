@@ -29,12 +29,11 @@ class CompleteForm(forms.ModelForm):
 class ParcelForm(forms.ModelForm):
     deliver_name = forms.CharField(required=True, max_length=32, label='姓名', empty_value='姓名',
                                    widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
-    deliver_phone = forms.RegexField(regex=r'^\+?1?\d{9,15}$', label='电话',
+    deliver_phone = forms.CharField(max_length=128, label='电话',
                                      widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
-    deliver_area = forms.ChoiceField(choices=area, required=True, widget=forms.Select(), label='地区')
-    deliver_address = forms.CharField(required=True, label='地址',
-                                      widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
-    deliver_is_getmsg = forms.BooleanField(label=u'是否接收寄件信息')
+    deliver_area = forms.CharField(max_length=256, widget=forms.TextInput(attrs={'class': 'form-control billSimple-text', "data-toggle":"city-picker"}), label='地区')
+    deliver_address = forms.CharField(required=True, label='地址',widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
+    deliver_is_getmsg = forms.BooleanField(label=u'是否接收寄件信息', required=False)
     deliver_department = forms.CharField(label='所属部门', required=False, empty_value='无', max_length=64,
                                          widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
     deliver_employee_id = forms.CharField(label='员工工号', required=False, empty_value='无', max_length=64,
@@ -42,12 +41,12 @@ class ParcelForm(forms.ModelForm):
 
     receiver_name = forms.CharField(required=True, max_length=32, label='姓名', empty_value='姓名',
                                     widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
-    receiver_phone = forms.RegexField(regex=r'^\+?1?\d{9,15}$', label='电话',
+    receiver_phone = forms.CharField(max_length=128, label='电话',
                                       widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
-    receiver_area = forms.ChoiceField(choices=area, required=True, widget=forms.Select(), label='地区')
+    receiver_area = forms.CharField(max_length=256, widget=forms.TextInput(attrs={'class': 'form-control billSimple-text', "data-toggle":"city-picker"}), label='地区')
     receiver_address = forms.CharField(required=True, label='地址',
                                        widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
-    receiver_is_getmsg = forms.BooleanField(label=u'是否接收短信签收提醒')
+    receiver_is_getmsg = forms.BooleanField(required=False, label=u'是否接收短信签收提醒')
     pinfo = forms.ChoiceField(choices=cargo_type, required=True, widget=forms.Select(), label='物品类型')
 
     class Meta:

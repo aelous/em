@@ -102,19 +102,20 @@ def parcel(request):
     pdelivers_name = set()
     preceiver_name = set()
     for i in info:
-        pdelivers_name.add(i.pdeliver.username)
-        preceiver_name.add(i.preceiver.username)
+        pdelivers_name.add(i.pdeliver.address)
+        preceiver_name.add(i.preceiver.address)
     pdelivers=[]
     preceivers=[]
 
     for i in pdelivers_name:
-        pdelivers.append(ExpressProfile.objects.filter(username=i)[0])
+        pdelivers.append(ExpressProfile.objects.filter(address=i)[0])
 
     for i in preceiver_name:
-        preceivers.append(ExpressProfile.objects.filter(username=i)[0])
+        preceivers.append(ExpressProfile.objects.filter(address=i)[0])
 
     if request.method == 'POST':
         form = ParcelForm(request.POST)
+        print form.is_valid(), form.errors
         if form.is_valid():
             data = form.cleaned_data
             deliver = ExpressProfile(username=data['deliver_name'],
@@ -153,6 +154,7 @@ def parcel(request):
             u.save()
             message = 'save success'
     else:
+        print 'error'
         form = ParcelForm()
     return render_to_response('send.html', locals())
 

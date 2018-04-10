@@ -9,82 +9,57 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>Bootstrap 101 Template</title>
 
+
+    <!--可无视-->
+    {#    <link href="{% static 'css/main.css'%}" rel="stylesheet" type="text/css"/>#}
+
+    <!--必要样式-->
+    {#    <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>#}
     <!-- Bootstrap -->
     <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
-
+    <link href="{% static 'css/city-picker.css' %}" rel="stylesheet" type="text/css"/>
     <!--<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">-->
     <link href="{% static 'css/commons.css' %}" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    {#    <script src="{% static 'js/jquery.js' %}"></script>#}
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/city-picker.data.js' %}"></script>
+    <script src="{% static 'js/city-picker.js' %}"></script>
     <script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
 
 </head>
 
 <body>
 <h2>模态框（Modal）插件方法</h2>
-<!-- 按钮触发模态框 -->
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    开始演示模态框
+<div style="position: relative;"><!-- container -->
+    <input id="city-picker2" readonly type="text">
+</div>
+<button class="btn btn-success" id="test" type="button">getCode<span class="code"></span>
 </button>
-<!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true">×
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    寄件人地址a
-                </h4>
-            </div>
-            <div class="modal-body">
-                <table class="table" cellspacing="0" width="100%" id="deliver_table">
-                    <thead>
-                    <tr>
-                        <th><span>姓名</span></th>
-                        <th><span>电话</span></th>
-                        <th><span>地址</span></th>
-                        <th><span>操作</span></th>
-                    </tr>
-                    </thead>
-                    <tbody role="alert">
-                    {% for parcel in pdelivers %}
-                        <tr/>
-                        <td class=""> {{ parcel.username }}</td>
-                        <td class=""> {{ parcel.phone}}</td>
-                        <td class=""> {{ parcel.area }}</td>
-                        <td class=""> <button id="id">确认</button></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal">关闭
-                </button>
-                <button type="button" class="btn btn-primary">
-                    提交更改
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<script>
-    $(function () {
-        $('#myModal').modal({
-            keyboard: true
-        })
-    });
-</script>
 <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#deliver_table').DataTable();
-        });
-    </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#city-picker2").citypicker();
+
+        $("#test").click(function () {
+            {#            $("#city-picker2").citypicker('reset');#}
+            {#            $("#city-picker2").citypicker({#}
+            {#                province: "江苏省",#}
+            {#                city: "常州市",#}
+            {#                district: "溧阳市"#}
+            {#            });#}
+            $("#city-picker2").citypicker('destroy');
+            $("#city-picker2").citypicker();
+
+            {#            val = $("#city-picker2").val()#}
+            {#            alert(val);#}
+            {#            $("#city-picker2").val('destroy');#}
+        })
+    });
+</script>
+
 </body>
 </html>
