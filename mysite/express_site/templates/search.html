@@ -22,7 +22,7 @@
                 </form>
             </div>
              <div class="box-content">
-                <table class="table table-striped table-bordered bootstrap-datatable datatable dataTable">
+                <table id="search_table" class="table table-striped table-bordered bootstrap-datatable datatable dataTable">
                       <thead>
                           <tr role="row">
                               <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 80px;" >寄件单号</th>
@@ -56,6 +56,11 @@
 </div>
 
 <div class="clear"></div>
+ <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#search_table').DataTable();
+        });
 
+    </script>
 
 {% endblock %}
