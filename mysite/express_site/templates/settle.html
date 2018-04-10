@@ -3,95 +3,94 @@
 
 {% block contents %}
 
-<div id="content" class="span10">
-    <!-- content starts -->
-    <div>
-        <ul class="breadcrumb">
-            <li>
-                <a href="">结算信息</a>
-            </li>
-        </ul>
-    </div>
+    <div id="content" class="span10">
+        <!-- content starts -->
+        <div>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">结算信息</a>
+                </li>
+            </ul>
+        </div>
 
-    <div class="row-fluid">
-        {% bootstrap_alert message alert_type='success' %}
+        <div class="row-fluid">
+            <div class="box span8">
+                <div class="box-content">
+                    <table class="table" id="deliver_table">
+                        <thead>
+                        <tr role="row">
+                            <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
+                                style="width: 10px;">寄件单号
+                            </th>
+                            <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
+                                style="width: 10px;">快递公司
+                            </th>
+                            <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
+                                style="width: 1000px;">目的地
+                            </th>
+                            <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
+                                style="width: 10px;">重量
+                            </th>
+                            <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
+                                style="width: 10px;">备注
+                            </th>
+                            <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
+                                style="width: 10px;">保价
+                            </th>
+                            <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
+                                style="width: 10px;">费用
+                            </th>
+                        </tr>
+                        </thead>
 
-        <div class="box span8">
-            <div class="box-content">
-                <table class="table">
-                    <thead>
-                    <tr role="row">
-                        <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
-                            style="width: 10px;">寄件单号
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
-                            style="width: 10px;">快递公司
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
-                            style="width: 20px;">目的地
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
-                            style="width: 10px;">重量
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
-                            style="width: 10px;">备注
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
-                            style="width: 10px;">保价
-                        </th>
-                        <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1"
-                            style="width: 10px;">费用
-                        </th>
-                    </tr>
-                    </thead>
+                        <tbody>
+                        {% for sms in info %}
+                            <tr/>
+                            <td class="pnum"> {{ sms.pnum }}</td>
+                            <td class="pname">
+                                <select class="selectpicker">
+                                    <option>{{ sms.pname }}</option>
+                                    {% for i in company %}
+                                        <option>{{ i }}</option>
+                                    {% endfor %}
+                                </select>
 
-                    <tbody >
-                    {%for sms in info%}
-                    <tr/>
-                    <td  class="pnum"> {{sms.pnum}}</td>
-                    <td  class="pname">
-                        <select class="selectpicker">
-                            <option>{{sms.pname}}</option>
-                            {% for i in company%}
-                            <option>{{i}}</option>
-                            {% endfor %}
-                        </select>
+                            </td>
+                            <td class="area"> {{ sms.preceiver.area }}</td>
+                            <td class=""><input type="text" class="pweight" value="{{ sms.pweight }}"></td>
+                            <td class=""><input type="text" class="premark" value="{{ sms.premark }}"></td>
+                            <td class="psupport"> {{ sms.psupport }}</td>
+                            <td class=""><input type="text" class="cost" readonly value="10"></td>
+                            </tr>
+                        {% endfor %}
 
-                    </td>
-                    <td  class="area"> {{sms.preceiver.area}}</td>
-                    <td  class=""><input type="text" class="pweight" value="{{sms.pweight}}"></td>
-                    <td  class=""><input type="text" class="premark" value="{{sms.premark}}"></td>
-                    <td  class="psupport"> {{sms.psupport}}</td>
-                    <td  class=""><input type="text" class="cost" readonly value="10"></td>
-                    </tr>
-                    {%endfor%}
-
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </div>
 
     </div>
 
-</div>
+    <div class="clear"></div>
 
-<div class="clear"></div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#deliver_table').DataTable();
+            $(".table").on('click', 'tr', function (e) {
+                var pname = $(this).closest('tr').find('.pname').text();
+                var area = $(this).closest('tr').find('.area').text();
+                var pweight = $(this).closest('tr').find('.pweight').val();
+                var premark = $(this).closest('tr').find('.premark').val();
+                var psupport = $(this).closest('tr').find('.psupport').text();
+                var cost = $(this).closest('tr').find('.cost').val();
+                cost = parseInt(Math.random() * 99, 10);
+                $(this).closest('tr').find('.cost').val(cost);
+                <!--alert(pname.length);-->
+            });
+        });
 
-<script type="text/javascript">
-$(document).ready(function(){
-$(".table").on('click','tr',function(e){
-    var pname = $(this).closest('tr').find('.pname').text();
-    var area = $(this).closest('tr').find('.area').text();
-    var pweight = $(this).closest('tr').find('.pweight').val();
-    var premark = $(this).closest('tr').find('.premark').val();
-    var psupport = $(this).closest('tr').find('.psupport').text();
-    var cost = $(this).closest('tr').find('.cost').val();
-    cost = pname.length + pweight + premark.length
-    $(this).closest('tr').find('.cost').val(cost);
-    <!--alert(pname.length);-->
-});
-});
-
-</script>
+    </script>
 
 {% endblock %}

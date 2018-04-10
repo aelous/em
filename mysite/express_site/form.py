@@ -47,22 +47,37 @@ class ParcelForm(forms.ModelForm):
     receiver_address = forms.CharField(required=True, label='地址',
                                        widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
     receiver_is_getmsg = forms.BooleanField(required=False, label=u'是否接收短信签收提醒')
-    pinfo = forms.ChoiceField(choices=cargo_type, required=True, widget=forms.Select(), label='物品类型')
+    pinfo = forms.ChoiceField(choices=cargo_type, required=True, widget=forms.Select(attrs={'class': 'form-control billSimple-text'}), label='物品类型')
 
     class Meta:
         model = ParcelProfile
         fields = ('pname', 'pweight', 'psupport', 'remark', 'ppayment', 'psupport_value')
+        widgets = {'psupport': forms.TextInput(attrs={'class': 'form-control billSimple-text'}),
+                   'remark':forms.TextInput(attrs={'class': 'form-control billSimple-text'}),
+                   'pweight':forms.TextInput(attrs={'class': 'form-control billSimple-text'}),
+                   'psupport_value':forms.TextInput(attrs={'class': 'form-control billSimple-text'}),
+                   'pname':forms.Select(attrs={'class': 'form-control billSimple-text'}),
+                   'ppayment':forms.Select(attrs={'class': 'form-control billSimple-text'}),
+                   }
 
 
 class UploadForm(forms.Form):
-    input_excel = forms.FileField(required=False, label=u"使用Excel批量导入",  widget=forms.FileInput())
+    input_excel = forms.FileField(required=False, label=u"使用Excel批量导入",  widget=forms.FileInput(attrs={'class': 'form-control'}))
 
+class JQueryUIDatepickerWidget(forms.DateInput):
+    def __init__(self, **kwargs):
+        super(forms.DateInput, self).__init__(attrs={"size":10, "class": "form-control dateinput"}, **kwargs)
+
+    class Media:
+        css = {"all":("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/redmond/jquery-ui.css",)}
+        js = ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js",
+              "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js",)
 
 class SearchForm(forms.Form):
     today = datetime.date.today()
     pnum = forms.CharField(required=False, label='订单号')
     pcargo_num = forms.CharField(required=False, label='物流单号')
     deliver_name = forms.CharField(required=False, label='寄件人姓名')
-    start_time = forms.DateTimeField(initial=datetime.date(year=today.year, month=today.month - 1, day=today.day),
-                                     label='开始时间')
-    end_time = forms.DateTimeField(initial=datetime.date.today, label='结束时间')
+    start_time = forms.DateField(initial=datetime.date(year=today.year, month=today.month - 1, day=today.day),
+                                     label='开始时间', widget=JQueryUIDatepickerWidget)
+    end_time = forms.DateField(initial=datetime.date.today, label='结束时间')
