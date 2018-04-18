@@ -51,13 +51,15 @@ class ParcelForm(forms.ModelForm):
 
     class Meta:
         model = ParcelProfile
-        fields = ('pname', 'pweight', 'psupport', 'remark', 'ppayment', 'psupport_value')
-        widgets = {'psupport': forms.TextInput(attrs={'class': 'form-control billSimple-text'}),
+        fields = ('pname', 'pweight', 'psupport', 'remark', 'ppayment', 'psupport_value', 'pcargo_num')
+        widgets = {
+            # 'psupport': forms.BooleanField(),
                    'remark':forms.TextInput(attrs={'class': 'form-control billSimple-text'}),
                    'pweight':forms.TextInput(attrs={'class': 'form-control billSimple-text'}),
                    'psupport_value':forms.TextInput(attrs={'class': 'form-control billSimple-text'}),
                    'pname':forms.Select(attrs={'class': 'form-control billSimple-text'}),
                    'ppayment':forms.Select(attrs={'class': 'form-control billSimple-text'}),
+                   'pcargo_num':forms.TextInput(attrs={'class': 'form-control billSimple-text'})
                    }
 
 

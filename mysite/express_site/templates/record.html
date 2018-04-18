@@ -1,0 +1,479 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+    <div class="clearfix">
+        <div class="page-content">
+            <div class="panel panel-default panelBody" data-reactid=".0.1.1.1.0.0.1.0.0.1">
+                <div class="panel-body pos-relative" data-reactid=".0.1.1.1.0.0.1.0.0.1.0">
+                    <form role="form" method="post">
+                        <input name="is_pcargo_num" value="True" type="hidden">
+                        <label class="mgr4 billSimple-label float" data-reactid=".0.1.1.1.0.0.1.0.0.1.0.0">单号:
+                            *</label>
+                        <input class="form-control billSimple-text" name="pcargo_num" type="text" maxlength="100"
+                               size="80"
+                               placeholder="请输入订单号" value="{{ pcargo_num }}" style="border: 1px solid green;"
+                               data-reactid=".0.1.1.1.0.0.1.0.0.1.0.2">
+                        <span data-reactid=".0.1.1.1.0.0.1.0.0.1.0.3"></span>
+                        <div class="set-wrap" data-reactid=".0.1.1.1.0.0.1.0.0.1.0.5"><img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAB/UlEQVRIS8VVTW6bYBB9gwmKV3FvkNygN6hzgmaJf6TihVF3oSeoc4LQXWQvQiVSs6t7g+QE7Q3inqBkFcvGTDXERB/wOaFW07KEYd7MmzdvCC/8UN38tv3+EGb6LotPjM9RdDGv8299gN5wRkRvJSmDr6NwcrwzgFRbrrDTd1lNOA3HheJ0/0h8pQO7O3TIoEtmzEHpYGEmP/YT65SAkQrAwGhhLj81E6sN8CVALU55EH2ZBGpcAaDbHb5mg77XaX1bDCfGkdp9AeDEcVr7K2tOhINdQJhxF12NW1s7kA923x0R8HEngOcokqTSRTOxfhX4ZtyB2UPauM7eG+s2iPxyp+XBa4fc6bkeCOc5gLS92FsezoIgVkG1dDI+TK/GfoUikRiZqSQ9KVOjU0YekytOQ+fs3lwOpKhsyE/xXlaFmmxT2K1uXgycReFY5vkvAMRnGms/t4LCgDXKyL93+q5Q+rVCK/M3rBue7EN1kysy5fjeXB3phtxM9m5lgx8FsaHlyT3QyRTgGEwer42bTHqN9A2IfTW5vK8l0xddtIfqi23/2UZzPA0nr/6f2WWS3dg1mH8ysSN23VxZjrrdEic6X5hLX+yaGYHYxrN2/bihmoNj99xY9Z6dD842zm3lZAJ8Mw0n7TrzqX2TM3NLLC9LmhjBXz/6darVxfwG/UgRKNVO3RAAAAAASUVORK5CYII="
+                                name="setImg" class="setting-pic" data-reactid=".0.1.1.1.0.0.1.0.0.1.0.5.0"></div>
+                        <div class="mgb6" data-reactid=".0.1.1.1.0.0.1.0.0.1.0.6" id="hint">请输入订单号</div>
+                        <button type="submit" class="btn btn-default">确认</button>
+                    </form>
+
+                </div>
+            </div>
+
+            <div id="second_form">
+                <form role="form" method="post">
+                    <div class="mgb6">
+                        <h4><span class="label label-primary arrowed-in-right label-lg float mgr6"><b>物流信息</b></span>
+                        </h4>
+                        <div class="switch-check"><label class="switch-bg"><input type="checkbox" class="not-empty"
+                                                                                  name="switch"><span></span></label>
+                        </div>
+                        <a class="mgr4" href="javascript:void(0);"></a>
+
+                    </div>
+                    <div class="panel panel-default panelBody">
+                        <div class="panel-body ">
+                            <div class="mgb6 pos-relative">
+                        <span>
+                        {{ form.pcargo_num.error }}
+                        <label for="{{ form.pcargo_num.id_for_label }}">
+                            {{ form.pcargo_num.label }}:* </label>
+                        {{ form.pcargo_num }}
+                        </span>
+                            </div>
+
+                        </div>
+                        <div class="panel-body ">
+                            <div class="mgb6 pos-relative">
+                        <span>
+                        {{ form.pname.error }}
+                        <label for="{{ form.pname.id_for_label }}">
+                            {{ form.pname.label }}:* </label>
+                        {{ form.pname }}
+                        </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mgb6">
+                        <h4><span class="label label-primary arrowed-in-right label-lg float mgr6"><b>寄件人地址</b></span>
+                        </h4>
+                        <div class="switch-check"><label class="switch-bg"><input type="checkbox" class="not-empty"
+                                                                                  name="switch"><span></span></label>
+                        </div>
+                        <a class="mgr4" href="javascript:void(0);" id="deliver_model">[选择历史寄件人]</a>
+
+                    </div>
+                    <div class="panel panel-default panelBody">
+                        <div class="panel-body ">
+                            <div class="mgb6 pos-relative">
+                        <span>
+                        {{ form.deliver_name.error }}
+                        <label for="{{ form.deliver_name.id_for_label }}">
+                            {{ form.deliver_name.label }}:* </label>
+                        {{ form.deliver_name }}
+                        </span>
+                            </div>
+                            <div class="mgb6 pos-relative">
+                        <span>
+                    {{ form.deliver_phone.error }}
+                    <label for="{{ form.deliver_phone.id_for_label }}">
+                        {{ form.deliver_phone.label }}:* </label>
+                    {{ form.deliver_phone }}
+</span>
+                            </div>
+
+                            <div class="form-inline form-group">
+                                <div id="distpicker">
+                                    {{ form.receiver_area.error }}
+                                    <label for="{{ form.receiver_area.id_for_label }}">
+                                        {{ form.receiver_area.label }}:* </label>
+                                    <div class="form-group">
+                                        <div style="position: relative;">
+                                            {{ form.deliver_area }}
+                                        </div>
+                                    </div>
+                                    {#                                <div class="form-group">#}
+                                    <button class="btn btn-sm btn-warning" id="deliver_reset" type="button">重置</button>
+                                    <button class="btn btn-sm btn-danger" id="deliver_destroy" type="button">确定</button>
+                                    {#                                </div>#}
+                                </div>
+                            </div>
+                            <div class="mgb6 pos-relative">
+                        <span>
+                    {{ form.deliver_address.error }}
+                    <label for="{{ form.deliver_address.id_for_label }}">
+                        {{ form.deliver_address.label }}:* </label>
+                    {{ form.deliver_address }}
+</span>
+                            </div>
+                            <div class="mgb6 pos-relative">
+                        <span>
+                    {{ form.deliver_department.error }}
+                    <label for="{{ form.deliver_department.id_for_label }}">
+                        {{ form.deliver_department.label }}:* </label>
+                    {{ form.deliver_department }}
+</span>
+                            </div>
+                            <div class="mgb6 pos-relative">
+                        <span>
+                    {{ form.deliver_employee_id.error }}
+                    <label for="{{ form.deliver_employee_id.id_for_label }}">
+                        {{ form.deliver_employee_id.label }}:* </label>
+                    {{ form.deliver_employee_id }}
+</span>
+                            </div>
+                            <div class="mgb6 pos-relative">
+                        <span>
+                    {{ form.deliver_is_getmsg.error }}
+                    <label for="{{ form.deliver_is_getmsg.id_for_label }}">
+                        {{ form.deliver_is_getmsg.label }}:* </label>
+                    {{ form.deliver_is_getmsg }}
+</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="mgb6">
+                        <h4><span class="label label-success arrowed-in-right label-lg float mgr6"><b>收件人地址</b></span>
+                        </h4>
+                        <div class="switch-check"><label class="switch-bg"><input type="checkbox" class="not-empty"
+                                                                                  name="switch"><span></span></label>
+                        </div>
+                        <a class="mgr4" href="javascript:void(0);" id="receiver_model">[选择历史收件人]</a>
+                    </div>
+                    <div class="panel panel-default panelBody">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                {{ form.receiver_name.error }}
+                                <label for="{{ form.receiver_name.id_for_label }}">
+                                    {{ form.receiver_name.label }}:* </label>
+                                {{ form.receiver_name }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.receiver_phone.error }}
+                                <label for="{{ form.receiver_phone.id_for_label }}">
+                                    {{ form.receiver_phone.label }}:* </label>
+                                {{ form.receiver_phone }}
+
+                            </div>
+
+
+                            <div class="form-inline form-group">
+                                <div id="distpicker">
+                                    {{ form.receiver_area.error }}
+                                    <label for="{{ form.receiver_area.id_for_label }}">
+                                        {{ form.receiver_area.label }}:* </label>
+                                    <div class="form-group">
+                                        <div style="position: relative;">
+                                            {#                                        <input id="id_receiver_area" class="form-control" readonly type="text"#}
+                                            {#                                               name="receiver_area"#}
+                                            {#                                               data-toggle="city-picker">#}
+                                            {{ form.receiver_area }}
+                                        </div>
+                                    </div>
+                                    {#                                <div class="form-group">#}
+                                    <button class="btn btn-sm btn-warning" id="receiver_reset" type="button">重置</button>
+                                    <button class="btn btn-sm btn-danger" id="receiver_destroy" type="button">确定
+                                    </button>
+                                    {#                                </div>#}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form.receiver_address.error }}
+                                <label for="{{ form.receiver_address.id_for_label }}">
+                                    {{ form.receiver_address.label }}:* </label>
+                                {{ form.receiver_address }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.receiver_is_getmsg.error }}
+                                <label for="{{ form.receiver_is_getmsg.id_for_label }}">
+                                    {{ form.receiver_is_getmsg.label }}:* </label>
+                                {{ form.receiver_is_getmsg }}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-default">提交</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="deliver_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        选择寄件人
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table hover" cellspacing="0" width="100%" id="deliver_table">
+                        <thead>
+                        <tr>
+                            <th><span>姓名</span></th>
+                            <th><span>电话</span></th>
+                            <th><span>地区</span></th>
+                            <th><span>地址</span></th>
+                            <th><span>所属部门</span></th>
+                            <th><span>员工工号</span></th>
+                            {#                            <th><span>操作</span></th>#}
+                        </tr>
+                        </thead>
+                        <tbody role="alert">
+                        {% for parcel in pdelivers %}
+                            <tr/>
+                            <td class=""> {{ parcel.username }}</td>
+                            <td class=""> {{ parcel.phone }}</td>
+                            <td class=""> {{ parcel.area }}</td>
+                            <td class=""> {{ parcel.address }}</td>
+                            <td class=""> {{ parcel.department }}</td>
+                            <td class=""> {{ parcel.employee_id }}</td>
+                            {#                            <td class="">#}
+                            {#                                <div><a class="deliver_chose" style="color:#69aa46;margin:0 3px;cursor:pointer;">编辑</a></div>#}
+                            {#                            </td>#}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deliver_button" data-dismiss="modal">
+                        选择
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade" id="receiver_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        选择收件人
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table hover" cellspacing="0" width="100%" id="receiver_table">
+                        <thead>
+                        <tr>
+                            <th><span>姓名</span></th>
+                            <th><span>电话</span></th>
+                            <th><span>地区</span></th>
+                            <th><span>地址</span></th>
+                        </tr>
+                        </thead>
+                        <tbody role="alert">
+                        {% for parcel in preceivers %}
+                            <tr/>
+                            <td class=""> {{ parcel.username }}</td>
+                            <td class=""> {{ parcel.phone }}</td>
+                            <td class=""> {{ parcel.area }}</td>
+                            <td class=""> {{ parcel.address }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="receiver_button" data-dismiss="modal">
+                        选择
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <div class="clear"></div>
+
+
+{% endblock %}
+
+{% block extra_script %}
+    <script>
+        $(document).ready(function () {
+            console.log("test")
+            $('#second_form').hide()
+            {% if p_cargo_init %}
+                $('#second_form').show()
+                $('#id_deliver_name').val("{{ p.pdeliver.username }}");
+                $('#id_deliver_phone').val("{{ p.pdeliver.phone }}");
+                $('#id_deliver_area').citypicker('destroy')
+                $('#id_deliver_area').val("{{ p.pdeliver.area }}")
+                $('#id_deliver_address').val("{{ p.pdeliver.address }}");
+                $('#id_deliver_department').val("{{ p.pdeliver.department }}");
+                $('#id_deliver_employee_id').val("{{ p.pdeliver.employee_id }}");
+                {% if p.pdeliver.is_getmsg %}
+                    $('#id_deliver_is_getmsg').checked = true;
+                {% else %}
+                    $('#id_deliver_is_getmsg').checked = false;
+                {% endif %}
+
+                $('#id_receiver_name').val("{{ p.preceiver.username }}");
+                $('#id_receiver_phone').val("{{ p.preceiver.phone }}");
+                $('#id_receiver_area').citypicker('destroy')
+                $('#id_receiver_area').val("{{ p.preceiver.area }}")
+                $('#id_receiver_address').val("{{ p.preceiver.address }}");
+                $('#id_receiver_department').val("{{ p.preceiver.department }}");
+                $('#id_receiver_employee_id').val("{{ p.preceiver.employee_id }}");
+                {% if p.preceiver.is_getmsg %}
+                    $('#id_receiver_is_getmsg').checked = true;
+                {% else %}
+                    $('#id_receiver_is_getmsg').checked = false;
+                {% endif %}
+                $('#hint').text("");
+            {% else %}
+                $('#hint').text("请输入正确的订单号");
+
+            {% endif %}
+
+
+            $("#deliver_model").click(function () {
+                $('#deliver_Modal').modal({
+                    keyboard: true
+                })
+            });
+
+            var table = $('#deliver_table').DataTable();
+
+            var name = null;
+            var phone = null;
+            var area = null;
+            var address = null;
+            $('#deliver_table').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    name = null;
+                    phone = null;
+                    area = null;
+                    address = null;
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    name = $(this).find("td:nth-child(1)").text();
+                    phone = $(this).find("td:nth-child(2)").text();
+                    area = $(this).find("td:nth-child(3)").text();
+                    address = $(this).find("td:nth-child(4)").text();
+                    department = $(this).find("td:nth-child(5)").text();
+                    employee_id = $(this).find("td:nth-child(6)").text();
+
+
+                }
+            });
+
+            $('#deliver_button').click(function () {
+                if (area != null) {
+                    $('#id_deliver_name').val(name);
+                    $('#id_deliver_phone').val(phone);
+                    $('#id_deliver_area').citypicker('destroy')
+                    $('#id_deliver_area').val(area)
+                    $('#id_deliver_address').val(address);
+                    if (department != " None") {
+                        $('#id_deliver_department').val(department);
+                        $('#id_deliver_employee_id').val(employee_id);
+                    }
+                }
+            })
+
+            {#            receiver model#}
+            $("#receiver_model").click(function () {
+                $('#receiver_Modal').modal({
+                    keyboard: true
+                })
+            });
+
+
+            var table = $('#receiver_table').DataTable();
+            var rname = null;
+            var rphone = null;
+            var rarea = null;
+            var raddress = null;
+            $('#receiver_table').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    rname = null;
+                    rphone = null;
+                    rarea = null;
+                    raddress = null;
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    rname = $(this).find("td:nth-child(1)").text();
+                    rphone = $(this).find("td:nth-child(2)").text();
+                    rarea = $(this).find("td:nth-child(3)").text();
+                    raddress = $(this).find("td:nth-child(4)").text();
+                    {#                    console.log(rname)#}
+                    {#                    department = $(this).find("td:nth-child(5)").text();#}
+                    {#                    employee_id = $(this).find("td:nth-child(6)").text();#}
+
+
+                }
+            });
+
+            $('#receiver_button').click(function () {
+                if (rarea != null) {
+                    $('#id_receiver_name').val(rname);
+                    $('#id_receiver_phone').val(rphone);
+                    $('#id_receiver_area').citypicker('destroy')
+                    $('#id_receiver_area').val(rarea)
+                    $('#id_receiver_address').val(raddress);
+                }
+            })
+
+
+            {#             city picker#}
+            $('#deliver_reset').click(function () {
+                $('#id_deliver_area').citypicker('destroy')
+                $('#id_deliver_area').val('');
+                $('#id_deliver_area').citypicker();
+
+            })
+
+            $('#receiver_reset').click(function () {
+                $('#id_receiver_area').citypicker('destroy')
+                $('#id_receiver_area').val('');
+                $('#id_receiver_area').citypicker()
+            })
+
+            $('#deliver_destory').click(function () {
+                $('#id_deliver_area').citypicker('destroy')
+            })
+
+            $('#receiver_destory').click(function () {
+                $('#id_receiver_area').citypicker('destroy')
+            })
+
+        });
+    </script>
+{% endblock %}

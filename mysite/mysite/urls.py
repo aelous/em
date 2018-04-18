@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^search/$', views.search, name='search'),
     url(r'^settle/$', views.settle, name='settle'),
+    url(r'^record/$', views.record, name='record'),
     url(r'^test/$', views.test, name='test'),
     url(r'^$', views.login),
 

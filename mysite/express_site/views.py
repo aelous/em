@@ -104,8 +104,8 @@ def parcel(request):
     for i in info:
         pdelivers_name.add(i.pdeliver.address)
         preceiver_name.add(i.preceiver.address)
-    pdelivers=[]
-    preceivers=[]
+    pdelivers = []
+    preceivers = []
 
     for i in pdelivers_name:
         pdelivers.append(ExpressProfile.objects.filter(address=i)[0])
@@ -260,16 +260,20 @@ def settle(request):
     company = [i[0] for i in express_company]
     return render_to_response('settle.html', locals())
 
-def test(request):
-    print 'test'
+@login_required(login_url='login')
+def record(request):
+    pcargo_num = ''
+    is_pcargo_num = ''
+    p_cargo_init = 0
+
     info = ParcelProfile.objects.all()
     pdelivers_name = set()
     preceiver_name = set()
     for i in info:
         pdelivers_name.add(i.pdeliver.username)
         preceiver_name.add(i.preceiver.username)
-    pdelivers=[]
-    preceivers=[]
+    pdelivers = []
+    preceivers = []
 
     for i in pdelivers_name:
         pdelivers.append(ExpressProfile.objects.filter(username=i)[0])
@@ -278,48 +282,57 @@ def test(request):
         preceivers.append(ExpressProfile.objects.filter(username=i)[0])
 
     if request.method == 'POST':
-        print 'post'
-        print request.POST
-        form = ParcelForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            print data
-            deliver = ExpressProfile(username=data['deliver_name'],
-                                     phone=data['deliver_phone'],
-                                     area=data['deliver_area'],
-                                     address=data['deliver_address'],
-                                     department=data['deliver_department'],
-                                     employee_id=data['deliver_employee_id'],
-                                     is_getmsg=data['deliver_is_getmsg']
-                                     )
-            deliver.save()
-            receiver = ExpressProfile(username=data['receiver_name'],
-                                      phone=data['receiver_phone'],
-                                      area=data['receiver_area'],
-                                      address=data['receiver_address'],
-                                      is_getmsg=data['receiver_is_getmsg']
+        pcargo_num = request.POST.get('pcargo_num', '')
+        is_pcargo_num = request.POST.get('is_pcargo_num', '')
 
-                                      )
-            receiver.save()
-            now = timezone.now()
-            p = ParcelProfile(pnum=int(time.time()),
-                              pname=data['pname'],
-                              remark=data['remark'],
-                              pinfo=data['pinfo'],
-                              psupport=data['psupport'],
-                              pweight=data['pweight'],
-                              ppayment=data['ppayment'],
-                              pdeliver=deliver,
-                              preceiver=receiver,
-                              ptime=datetime.datetime.now()
-                              )
-            p.save()
-            user = UserProfile.objects.get(username=request.user)
-            print user, p
-            u = UserParcelInfo(user=user, parcel=p)
-            u.save()
-            message = 'save success'
+        print 'pcargo_num: ', pcargo_num
+        print 'is_pcargo_num: ', is_pcargo_num
+
+        if is_pcargo_num == 'True':
+            p = ParcelProfile.objects.filter(pnum=pcargo_num)
+            if len(p) > 0:
+                p = p[0]
+                p_cargo_init = 1
+                form = ParcelForm()
+                return render_to_response('record.html', locals())
+            else:
+                message = '请输入正确的订单号'
+                return render_to_response('record.html', locals())
+
+        else:
+            form = ParcelForm(request.POST)
+            if form.is_valid():
+                p = ParcelProfile.objects.get(pnum=pcargo_num)
+                data = form.cleaned_data
+                print data
+                deliver = ExpressProfile(username=data['deliver_name'],
+                                         phone=data['deliver_phone'],
+                                         area=data['deliver_area'],
+                                         address=data['deliver_address'],
+                                         department=data['deliver_department'],
+                                         employee_id=data['deliver_employee_id'],
+                                         is_getmsg=data['deliver_is_getmsg']
+                                         )
+                deliver.save()
+                receiver = ExpressProfile(username=data['receiver_name'],
+                                          phone=data['receiver_phone'],
+                                          area=data['receiver_area'],
+                                          address=data['receiver_address'],
+                                          is_getmsg=data['receiver_is_getmsg']
+
+                                          )
+                receiver.save()
+                p.pcargo_num = data['pcargo_num']
+                p.pname = data['pname']
+                p.pdeliver = deliver
+                p.preceiver = receiver
+                p.save()
+            else:
+                form = ParcelForm()
     else:
         print 'error'
         form = ParcelForm()
-    return render_to_response('test.html', locals())
+    return render_to_response('record.html', locals())
+
+def test():
+    pass
