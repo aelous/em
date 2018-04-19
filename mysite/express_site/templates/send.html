@@ -45,10 +45,10 @@
                                 <div class="form-group">
                                     <div style="position: relative;">
                                         {{ form.deliver_area }}
-{#                                        <input id="id_deliver_area" readonly name="deliver_area" class="form-control"#}
-{#                                               type="text"#}
-{#                                               name="deliver_area"#}
-{#                                               data-toggle="city-picker">#}
+                                        {#                                        <input id="id_deliver_area" readonly name="deliver_area" class="form-control"#}
+                                        {#                                               type="text"#}
+                                        {#                                               name="deliver_area"#}
+                                        {#                                               data-toggle="city-picker">#}
                                     </div>
                                 </div>
                                 {#                                <div class="form-group">#}
@@ -128,9 +128,9 @@
                                     {{ form.receiver_area.label }}:* </label>
                                 <div class="form-group">
                                     <div style="position: relative;">
-{#                                        <input id="id_receiver_area" class="form-control" readonly type="text"#}
-{#                                               name="receiver_area"#}
-{#                                               data-toggle="city-picker">#}
+                                        {#                                        <input id="id_receiver_area" class="form-control" readonly type="text"#}
+                                        {#                                               name="receiver_area"#}
+                                        {#                                               data-toggle="city-picker">#}
                                         {{ form.receiver_area }}
                                     </div>
                                 </div>
@@ -191,9 +191,9 @@
                             {{ form.psupport.error }}
                             <label for="{{ form.psupport.id_for_label }}">
                                 {{ form.psupport.label }}:* </label>
-                            {{ form.psupport }}
+                            {{ form.psupport }} <label style="color: red">价值超过1000元以上建议投保.贵重物品丢失或损坏未保价无法按照实际价值理赔</label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="psupport_div">
                             {{ form.psupport_value.error }}
                             <label for="{{ form.psupport_value.id_for_label }}">
                                 {{ form.psupport_value.label }}:* </label>
@@ -325,8 +325,19 @@
 {% block extra_script %}
     <script>
         $(document).ready(function () {
+            $('#psupport_div').hide();
+            $('#id_psupport').click(function () {
 
-{#            deliver model#}
+                if ($('#id_psupport').is(':checked')) {
+                    $('#psupport_div').show();
+
+                } else {
+                    $('#psupport_div').hide();
+
+                }
+
+            });
+            {#            deliver model#}
             $("#deliver_model").click(function () {
                 $('#deliver_Modal').modal({
                     keyboard: true
@@ -391,7 +402,7 @@
                 }
             })
 
-{#            receiver model#}
+            {#            receiver model#}
             $("#receiver_model").click(function () {
                 $('#receiver_Modal').modal({
                     keyboard: true
@@ -419,9 +430,9 @@
                     rphone = $(this).find("td:nth-child(2)").text();
                     rarea = $(this).find("td:nth-child(3)").text();
                     raddress = $(this).find("td:nth-child(4)").text();
-{#                    console.log(rname)#}
-{#                    department = $(this).find("td:nth-child(5)").text();#}
-{#                    employee_id = $(this).find("td:nth-child(6)").text();#}
+                    {#                    console.log(rname)#}
+                    {#                    department = $(this).find("td:nth-child(5)").text();#}
+                    {#                    employee_id = $(this).find("td:nth-child(6)").text();#}
 
 
                 }
