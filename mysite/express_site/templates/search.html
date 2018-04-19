@@ -26,6 +26,7 @@
                       <thead>
                           <tr role="row">
                               <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 80px;" >订单号</th>
+                              <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 80px;" >物流单号</th>
                               <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 80px;" >寄件人姓名</th>
                               <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 80px;" >收件人姓名</th>
                               <th class="sorting" role="columnheader" tabindex="0" rowspan="1" colspan="1" style="width: 5px;" >物品信息</th>
@@ -38,6 +39,7 @@
                         {%for sms in info%}
                         <tr/>
                             <td class=""> {{sms.parcel.pnum}}</td>
+                            <td class=""> {{sms.parcel.pcargo_num}}</td>
                             <td class=""> {{sms.parcel.pdeliver.username}}</td>
                             <td class=""> {{sms.parcel.preceiver.username}}</td>
                             <td class=""> {{sms.parcel.pinfo}}</td>

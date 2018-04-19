@@ -6,12 +6,12 @@
             <div class="panel panel-default panelBody" data-reactid=".0.1.1.1.0.0.1.0.0.1">
                 <div class="panel-body pos-relative" data-reactid=".0.1.1.1.0.0.1.0.0.1.0">
                     <form role="form" method="post">
-                        <input name="is_pcargo_num" value="True" type="hidden">
+                        <input name="is_pnum" value="True" type="hidden">
                         <label class="mgr4 billSimple-label float" data-reactid=".0.1.1.1.0.0.1.0.0.1.0.0">单号:
                             *</label>
-                        <input class="form-control billSimple-text" name="pcargo_num" type="text" maxlength="100"
+                        <input class="form-control billSimple-text" name="pnum" type="text" maxlength="100"
                                size="80"
-                               placeholder="请输入订单号" value="{{ pcargo_num }}" style="border: 1px solid green;"
+                               placeholder="请输入订单号" value="{{ pnum }}" style="border: 1px solid green;"
                                data-reactid=".0.1.1.1.0.0.1.0.0.1.0.2">
                         <span data-reactid=".0.1.1.1.0.0.1.0.0.1.0.3"></span>
                         <div class="set-wrap" data-reactid=".0.1.1.1.0.0.1.0.0.1.0.5"><img
@@ -26,6 +26,8 @@
 
             <div id="second_form">
                 <form role="form" method="post">
+                    <input name="pnum" value="{{ pnum }}" type="hidden">
+
                     <div class="mgb6">
                         <h4><span class="label label-primary arrowed-in-right label-lg float mgr6"><b>物流信息</b></span>
                         </h4>

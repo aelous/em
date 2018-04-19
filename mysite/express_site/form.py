@@ -80,6 +80,36 @@ class SearchForm(forms.Form):
     pnum = forms.CharField(required=False, label='订单号')
     pcargo_num = forms.CharField(required=False, label='物流单号')
     deliver_name = forms.CharField(required=False, label='寄件人姓名')
-    start_time = forms.DateField(initial=datetime.date(year=today.year, month=today.month - 1, day=today.day),
+    start_time = forms.DateField(required=False, initial=datetime.date(year=today.year, month=today.month - 1, day=today.day),
                                      label='开始时间', widget=JQueryUIDatepickerWidget)
-    end_time = forms.DateField(initial=datetime.date.today, label='结束时间')
+    end_time = forms.DateField(required=False, initial=datetime.date.today, label='结束时间')
+
+class ParcelForm2(forms.ModelForm):
+    deliver_name = forms.CharField(required=True, max_length=32, label='姓名', empty_value='姓名',
+                                   widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
+    deliver_phone = forms.CharField(max_length=128, label='电话',
+                                     widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
+    deliver_area = forms.CharField(max_length=256, widget=forms.TextInput(attrs={'class': 'form-control billSimple-text', "data-toggle":"city-picker"}), label='地区')
+    deliver_address = forms.CharField(required=True, label='地址',widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
+    deliver_is_getmsg = forms.BooleanField(label=u'是否接收寄件信息', required=False)
+    deliver_department = forms.CharField(label='所属部门', required=False, empty_value='无', max_length=64,
+                                         widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
+    deliver_employee_id = forms.CharField(label='员工工号', required=False, empty_value='无', max_length=64,
+                                          widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
+
+    receiver_name = forms.CharField(required=True, max_length=32, label='姓名', empty_value='姓名',
+                                    widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
+    receiver_phone = forms.CharField(max_length=128, label='电话',
+                                      widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
+    receiver_area = forms.CharField(max_length=256, widget=forms.TextInput(attrs={'class': 'form-control billSimple-text', "data-toggle":"city-picker"}), label='地区')
+    receiver_address = forms.CharField(required=True, label='地址',
+                                       widget=forms.TextInput(attrs={'class': 'form-control billSimple-text'}))
+
+    class Meta:
+        model = ParcelProfile
+        fields = ('pname', 'remark', 'pcargo_num')
+        widgets = {
+                   'remark':forms.TextInput(attrs={'class': 'form-control billSimple-text'}),
+                   'pname':forms.Select(attrs={'class': 'form-control billSimple-text'}),
+                   'pcargo_num':forms.TextInput(attrs={'class': 'form-control billSimple-text'})
+                   }
