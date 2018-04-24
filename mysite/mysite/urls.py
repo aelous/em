@@ -1,3 +1,4 @@
+#coding=utf-8
 """mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -34,3 +35,7 @@ urlpatterns = [
     url(r'^$', views.login),
 
 ]
+
+admin.site.site_header = u'快递资源管理系统'
+admin.site.index_title = u'快递资源管理'
+admin.site.site_title = u'快递资源管理系统'

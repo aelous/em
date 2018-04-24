@@ -13,7 +13,6 @@ class UserProfile(AbstractUser):
                               verbose_name='性别')
     address = models.CharField(max_length=100, verbose_name=u"地址", default="北京")
     mobile = models.CharField(max_length=11, null=True, blank=True, verbose_name='手机号')
-    is_admin = models.BooleanField(default=False, verbose_name='是否是管理员')
     email = models.CharField(max_length=50, verbose_name=u"邮箱", default="120@163.com")
 
     class Meta:
@@ -61,3 +60,35 @@ class ParcelProfile(models.Model):
 class UserParcelInfo(models.Model):
     user = models.ForeignKey(UserProfile)
     parcel = models.ForeignKey(ParcelProfile)
+
+
+class Express(models.Model):
+    name = models.CharField(max_length=128, verbose_name=u'快递公司')
+
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
+    class Meta:
+        verbose_name = u"快递公司"
+        verbose_name_plural = verbose_name
+
+
+class Province(models.Model):
+    name = models.CharField(max_length=128, verbose_name=u'地区名称')
+
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
+    class Meta:
+        verbose_name = u"地区"
+        verbose_name_plural = verbose_name
+
+
+class Weight(models.Model):
+    express_name = models.ForeignKey(Express)
+    province_name = models.ForeignKey(Province)
+    first_weight = models.IntegerField(verbose_name=u'首重')
+    continue_weight = models.IntegerField(verbose_name=u'续重')
+    class Meta:
+        verbose_name = u"结算信息"
+        verbose_name_plural = verbose_name

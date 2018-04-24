@@ -56,13 +56,14 @@ def register(request):
         if form.is_valid():
             input_username = request.POST.get('username')
             input_pwd = request.POST.get('password')
-            input_rank = request.POST.get('is_admin')
+            # input_rank = request.POST.get('is_admin')
+            input_rank = request.POST.get('is_superuser')
             print input_username, input_pwd, input_rank
 
             if input_rank == 'on':
-                UserProfile.objects.create_user(username=input_username, password=input_pwd, is_admin=True)
+                UserProfile.objects.create_user(username=input_username, password=input_pwd, is_superuser=True, is_staff=True)
             else:
-                UserProfile.objects.create_user(username=input_username, password=input_pwd)
+                UserProfile.objects.create_user(username=input_username, password=input_pwd,is_staff=True)
             message = '注册成功，请登录'
             return HttpResponseRedirect('/login/', {'message': '注册成功，请登录'})
             # return render_to_response('login.html', locals())
@@ -230,7 +231,8 @@ def search(request):
             deliver_name = data['deliver_name']
 
             user = UserProfile.objects.get(username=request.user)
-            if user.is_admin:
+            # if user.is_admin:
+            if user.is_superuser:
                 if pnum:
                     info = UserParcelInfo.objects.filter(parcel__pnum=pnum)
                 elif pcargo_num:

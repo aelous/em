@@ -87,7 +87,7 @@
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFCSURBVEhL5VVLbsJQDHS6KDdDVRdF9BQsegAkKiohrtEFWwppED/BvjdACC4TdyZKIiCB2LCgUiN58Z7HHv+eE0jFF4fSCVT6hzAN5OPhVXpVtia9rkR1fCK4MxlnIN3IYzyWp3gkz4i4wXtGrms4HpUQ8A46YlJsI7Glj4XUCuRQfGqYOoIhAYWoT7NIzwmWgfAMHyAalBFEucOMICM84zhzeEQALIKdmwgAXOkUUV0QRLu+msDTxLxEpgwmSS2HyCCyCLFKm7SU1SW6VHOD7g8QsKkcO4/MHCXCZLx5Gpw8tC9p/aMeoER7TMKU02AUYnfmEmGBvXt7gIXYNhNohIngVHiENuaHxldZsYMK+m8HAUau7i0R+tY1Z4CG/Vh2UI4JJQTB1kxg/dGcw91tF73o0rl/ynYVfCCDpreHN+F/ASEFwH6ybhWPAAAAAElFTkSuQmCC"><span
                         class="menu-text"> 寄件信息录入 </span></a>
             </li>
-            {% if request.user.is_admin %}
+            {% if request.user.is_superuser %}
                 <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
                     <a href="{% url 'upload' %}" style="color: rgb(0, 0, 0);" data-toggle="tooltip"
                        data-placement="right" title=""><img

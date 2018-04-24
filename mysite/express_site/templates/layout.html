@@ -43,7 +43,7 @@
 
                     <li class="nav-header ">账号相关</li>
 
-                    {% if request.user.is_admin %}
+                    {% if request.user.is_superuser %}
                     <li><a class="ajax-link" href="{% url 'upload' %}"><i class="icon-home"></i><span
                             class="">批量导入</span></a></li>
                     <li><a class="ajax-link" href="{% url 'settle' %}"><i class="icon-home"></i><span
