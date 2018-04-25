@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import os
 import time
 import uuid
 
+import StringIO
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, render_to_response, redirect
 from django.utils import timezone
-
+from pyExcelerator import Workbook
 from form import *
 from models import *
 from utils import get_date_range
@@ -61,9 +63,10 @@ def register(request):
             print input_username, input_pwd, input_rank
 
             if input_rank == 'on':
-                UserProfile.objects.create_user(username=input_username, password=input_pwd, is_superuser=True, is_staff=True)
+                UserProfile.objects.create_user(username=input_username, password=input_pwd, is_superuser=True,
+                                                is_staff=True)
             else:
-                UserProfile.objects.create_user(username=input_username, password=input_pwd,is_staff=True)
+                UserProfile.objects.create_user(username=input_username, password=input_pwd, is_staff=True)
             message = '注册成功，请登录'
             return HttpResponseRedirect('/login/', {'message': '注册成功，请登录'})
             # return render_to_response('login.html', locals())
@@ -235,8 +238,8 @@ def search(request):
             if user.is_superuser:
                 if pnum:
                     info = UserParcelInfo.objects.filter(parcel__pnum=pnum)
-                elif pcargo_num:
-                    info = UserParcelInfo.objects.filter(parcel__pcargo_num=pcargo_num)
+                    if len(info) == 0:
+                        info = UserParcelInfo.objects.filter(parcel__pcargo_num=pnum)
                 elif deliver_name:
                     info = UserParcelInfo.objects.filter(parcel__pdeliver__username=deliver_name)
                 else:
@@ -261,6 +264,7 @@ def settle(request):
     info = ParcelProfile.objects.all()
     company = [i[0] for i in express_company]
     return render_to_response('settle.html', locals())
+
 
 @login_required(login_url='login')
 def record(request):
@@ -299,18 +303,12 @@ def record(request):
                 return render_to_response('record.html', locals())
 
         else:
-            print 'begin save'
             form = ParcelForm2(request.POST)
-            print pnum
             if form.is_valid():
-            # if True:
                 data = request.POST
-                print 'pnum', data.get('pnum')
                 pnum = data['pnum']
                 p = ParcelProfile.objects.get(pnum=pnum)
                 data = form.cleaned_data
-
-                print data
                 # p.pdeliver.username=data['deliver_name']
                 # deliver = ExpressProfile(username=data['deliver_name'],
                 #                          phone=data['deliver_phone'],
@@ -340,6 +338,97 @@ def record(request):
         print 'error'
         form = ParcelForm()
     return render_to_response('record.html', locals())
+
+
+@login_required(login_url='login')
+def receive(request):
+    info = ReceiveParcelProfile.objects.all()
+    preceiver_name = set()
+    for i in info:
+        preceiver_name.add(i.receiver.username)
+    preceivers = []
+
+    if preceiver_name:
+        for i in preceiver_name:
+            preceivers.append(ExpressProfile.objects.filter(username=i)[0])
+    print preceivers
+
+    print request
+    if request.method == 'POST':
+        form = ReceiveParcelForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            r = ExpressProfile(username=data['name'],
+                                      phone=data['phone'],
+                                      is_getmsg=data['is_getmsg'],
+                                      department=data['department'],
+                                      floor=data['floor'],
+                                      employee_id=data['employee_id'])
+            r.save()
+            s = ReceiveParcelProfile(rcargo_num=data['rcargo_num'],
+                                     rname=data['rname'],
+                                     rinfo=data['rinfo'],
+                                     remark=data['remark'],
+                                     receiver=r)
+            s.save()
+            message='success'
+        else:
+            message='fail'
+        # form = ReceiveParcelForm()
+    else:
+        form = ReceiveParcelForm()
+    return render_to_response('receive.html', locals())
+
+
+@login_required(login_url='login')
+def receive_query(request, action=None):
+    if action == 'download':
+        data = request.GET
+        start_time = data['start_time']
+        end_time = data['end_time']
+        info = ReceiveParcelProfile.objects.filter(rtime__gte=start_time, rtime__lte=end_time)
+        wb = Workbook()
+        sheet = wb.add_sheet(u"收件信息%s-%s" % (start_time, end_time))
+        columns = [u'物流单号', u'快递公司', u'收件人姓名', u'部门', u'物品类型']
+        for i, c in enumerate(columns):
+            sheet.write(0, i, c)
+        for i, k in enumerate(info):
+            sheet.write(i + 1, 0, k.rcargo_num)
+            sheet.write(i + 1, 1, k.rname)
+            sheet.write(i + 1, 2, k.receiver.username)
+            sheet.write(i + 1, 3, k.receiver.department)
+            sheet.write(i + 1, 4, k.rinfo)
+
+        datafile = StringIO.StringIO()
+        wb.save(datafile)
+        datafile.seek(0)
+        response = HttpResponse(datafile.read(), content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=收件信息'
+        return response
+
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            start_time = data['start_time']
+            end_time = data['end_time']
+            pnum = data['pnum']
+            deliver_name = data['deliver_name']
+
+            # user = UserProfile.objects.get(username=request.user)
+            # if user.is_admin:
+            # if user.is_superuser:
+            if pnum:
+                info = ReceiveParcelProfile.objects.filter(rcargo_num=pnum)
+            elif deliver_name:
+                info = ReceiveParcelProfile.objects.filter(receiver__username=deliver_name)
+            else:
+                info = ReceiveParcelProfile.objects.filter(rtime__gte=start_time, rtime__lte=end_time)
+
+    else:
+        form = SearchForm()
+    return render_to_response('receive_query.html', locals())
+
 
 def test():
     pass

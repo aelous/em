@@ -32,6 +32,9 @@ urlpatterns = [
     url(r'^settle/$', views.settle, name='settle'),
     url(r'^record/$', views.record, name='record'),
     url(r'^test/$', views.test, name='test'),
+    url(r'^receive/$', views.receive, name='receive'),
+    url(r'^receive_query/$', views.receive_query, name='receive_query'),
+    url(r'^receive_query/(?P<action>(\w+))', views.receive_query),
     url(r'^$', views.login),
 
 ]

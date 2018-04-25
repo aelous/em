@@ -9,17 +9,17 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>物流管理系统</title>
 
-{#    <!-- Bootstrap -->#}
-{#    <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">#}
-{#    <link href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet">#}
-{##}
-{#    <!--<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">-->#}
-{#    <link href="{% static 'css/commons.css' %}" rel="stylesheet">#}
-{#    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->#}
-{#    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>#}
-{#    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->#}
-{#    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
-{#    <script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>#}
+    {#    <!-- Bootstrap -->#}
+    {#    <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">#}
+    {#    <link href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet">#}
+    {##}
+    {#    <!--<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">-->#}
+    {#    <link href="{% static 'css/commons.css' %}" rel="stylesheet">#}
+    {#    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->#}
+    {#    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>#}
+    {#    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->#}
+    {#    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+    {#    <script src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>#}
 
     <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet">
     <link href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet">
@@ -27,8 +27,8 @@
     <link href="{% static 'css/city-picker.css' %}" rel="stylesheet" type="text/css"/>
     <!--<link href="{% static 'css/dashboard.css' %}" rel="stylesheet">-->
     <link href="{% static 'css/commons.css' %}" rel="stylesheet">
-        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-{#    <script src="{% static 'js/jquery.js' %}"></script>#}
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    {#    <script src="{% static 'js/jquery.js' %}"></script>#}
     <script src="{% static 'js/bootstrap.js' %}"></script>
     <script src="{% static 'js/city-picker.data.js' %}"></script>
     <script src="{% static 'js/city-picker.js' %}"></script>
@@ -52,10 +52,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right" style="background-color: white">
-                <li><a href="/admin" >信息管理</a></li>
-{#                <li><a href="#">Settings</a></li>#}
-{#                <li><a href="#">Profile</a></li>#}
-{#                <li><a href="#">Help</a></li>#}
+                <li><a href="/admin">信息管理</a></li>
+                {#                <li><a href="#">Settings</a></li>#}
+                {#                <li><a href="#">Profile</a></li>#}
+                {#                <li><a href="#">Help</a></li>#}
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
@@ -79,13 +79,26 @@
                 <a href="{% url 'search' %}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right"
                    title=""><img
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFCSURBVEhL5VVLbsJQDHS6KDdDVRdF9BQsegAkKiohrtEFWwppED/BvjdACC4TdyZKIiCB2LCgUiN58Z7HHv+eE0jFF4fSCVT6hzAN5OPhVXpVtia9rkR1fCK4MxlnIN3IYzyWp3gkz4i4wXtGrms4HpUQ8A46YlJsI7Glj4XUCuRQfGqYOoIhAYWoT7NIzwmWgfAMHyAalBFEucOMICM84zhzeEQALIKdmwgAXOkUUV0QRLu+msDTxLxEpgwmSS2HyCCyCLFKm7SU1SW6VHOD7g8QsKkcO4/MHCXCZLx5Gpw8tC9p/aMeoER7TMKU02AUYnfmEmGBvXt7gIXYNhNohIngVHiENuaHxldZsYMK+m8HAUau7i0R+tY1Z4CG/Vh2UI4JJQTB1kxg/dGcw91tF73o0rl/ynYVfCCDpreHN+F/ASEFwH6ybhWPAAAAAElFTkSuQmCC"><span
-                        class="menu-text"> 寄件信息查询 </span></a>
+                        class="menu-text"> 寄件查询 </span></a>
             </li>
-        <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
+            <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
                 <a href="{% url 'record' %}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right"
                    title=""><img
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFCSURBVEhL5VVLbsJQDHS6KDdDVRdF9BQsegAkKiohrtEFWwppED/BvjdACC4TdyZKIiCB2LCgUiN58Z7HHv+eE0jFF4fSCVT6hzAN5OPhVXpVtia9rkR1fCK4MxlnIN3IYzyWp3gkz4i4wXtGrms4HpUQ8A46YlJsI7Glj4XUCuRQfGqYOoIhAYWoT7NIzwmWgfAMHyAalBFEucOMICM84zhzeEQALIKdmwgAXOkUUV0QRLu+msDTxLxEpgwmSS2HyCCyCLFKm7SU1SW6VHOD7g8QsKkcO4/MHCXCZLx5Gpw8tC9p/aMeoER7TMKU02AUYnfmEmGBvXt7gIXYNhNohIngVHiENuaHxldZsYMK+m8HAUau7i0R+tY1Z4CG/Vh2UI4JJQTB1kxg/dGcw91tF73o0rl/ynYVfCCDpreHN+F/ASEFwH6ybhWPAAAAAElFTkSuQmCC"><span
-                        class="menu-text"> 寄件信息录入 </span></a>
+                        class="menu-text"> 寄件录入 </span></a>
+            </li>
+            <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
+                <a href="{% url 'receive' %}" style="color: rgb(0, 0, 0);" data-toggle="tooltip" data-placement="right"
+                   title=""><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAH5SURBVEhL7ZQ/LwRRFMXPUtGgERIavUJQCTqfwDYiEWJnZ3ZRaGg2Cg2lQiXR+Ab+FKLwAZYGhdVLBEGCiOBd5z0zm9nNzO7MLp1JJjv75t3fuXPufRf4g0ssWOKg/1fRKo0hZWGP941kIBRprluAoA4CJwkvyDyEv2f8f69S2KkLrmbRRdCRpJmpexO6QIFXWqOzb4ktoMbRREiOkAvlQBXBDq4oZnP9Xa/xuRAZLkk0MmCAwVsqi0+TnZe1TVgK+8w2qe0x63rNwmZVAQESDHa4+cVvQ/GZReT7WQpnSkR1HWhfoICBWhhh0C5BTyWB/qwtPJoapLFavodrp6HZ09djyfos8BXQZE57mMCBBhC0HbRX2ZgIFZCFCnBdPBszOpien2ivg6xjkt3hX8BDYg5IWeYMuqbfvW7m+VC4hfOqxaUFWd7PPkuORJCQKbTSlsvAgnv2ORitKmAsABoIy+t5YrK20U7Rj1C4ti+Nu0jw8k20Z5DB95Xg7uEyxY99MXiNAm8VBdh5rNFYZLhMo4eWrHvT0LXoIUxEz5/IcLcNl70eZ/Ah+7/H1MLCYmDvZ5CLJUDQUvGE6tnCk+0BtBjfn/tblV/YV7MA4bdBwVzfcAfbl6ygIZ4A57rM/bQeM24LC+Y8GmZxO2PBvc2RRm5N5P+gAAe+AXJa+wp79HCiAAAAAElFTkSuQmCC"><span
+                        class="menu-text"> 收件 </span></a>
+            </li>
+            <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">
+                <a href="{% url 'receive_query' %}" style="color: rgb(0, 0, 0);" data-toggle="tooltip"
+                   data-placement="right"
+                   title=""><img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFCSURBVEhL5VVLbsJQDHS6KDdDVRdF9BQsegAkKiohrtEFWwppED/BvjdACC4TdyZKIiCB2LCgUiN58Z7HHv+eE0jFF4fSCVT6hzAN5OPhVXpVtia9rkR1fCK4MxlnIN3IYzyWp3gkz4i4wXtGrms4HpUQ8A46YlJsI7Glj4XUCuRQfGqYOoIhAYWoT7NIzwmWgfAMHyAalBFEucOMICM84zhzeEQALIKdmwgAXOkUUV0QRLu+msDTxLxEpgwmSS2HyCCyCLFKm7SU1SW6VHOD7g8QsKkcO4/MHCXCZLx5Gpw8tC9p/aMeoER7TMKU02AUYnfmEmGBvXt7gIXYNhNohIngVHiENuaHxldZsYMK+m8HAUau7i0R+tY1Z4CG/Vh2UI4JJQTB1kxg/dGcw91tF73o0rl/ynYVfCCDpreHN+F/ASEFwH6ybhWPAAAAAElFTkSuQmCC"><span
+                        class="menu-text"> 收件查询 </span></a>
             </li>
             {% if request.user.is_superuser %}
                 <li style="border-bottom: 1px solid rgb(229, 229, 229); background-color: rgb(248, 248, 248);">

@@ -3,3 +3,4 @@ django==1.11
 xlrd
 requests
 django-bootstrap3
+pyExcelerator

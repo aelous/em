@@ -26,17 +26,18 @@ class UserProfile(AbstractUser):
 class ExpressProfile(models.Model):
     username = models.CharField(max_length=64, verbose_name='姓名')
     phone = models.CharField(max_length=64, verbose_name='手机号')
-    area = models.TextField(verbose_name='地区')
-    address = models.TextField(verbose_name='地址')
+    area = models.TextField(null=True, blank=True,verbose_name='地区')
+    address = models.TextField(null=True, blank=True,verbose_name='地址')
     is_getmsg = models.BooleanField(default=False, verbose_name=u"是否接收短信提醒")
-
     department = models.CharField(max_length=64, null=True, blank=True, verbose_name='所属部门')
+    floor = models.CharField(max_length=64, null=True, blank=True, verbose_name='楼层')
     employee_id = models.CharField(max_length=64, null=True, blank=True, verbose_name='员工工号')
     # class Meta:
     #     abstract = True
 
 
 class ParcelProfile(models.Model):
+    """寄件货物信息"""
     pnum = models.CharField(max_length=128, db_index=True, verbose_name=u'订单号')
     pname = models.CharField(choices=express_company, default="顺丰",
                              max_length=32, verbose_name=u"物流名称")
@@ -55,6 +56,16 @@ class ParcelProfile(models.Model):
     remark = models.TextField(verbose_name='备注', null=True, blank=True)
     ptime = models.DateTimeField(auto_now=True, db_index=True, verbose_name='寄件时间')
     # pgettime = models.DateField(verbose_name=u"领取时间", null=True, blank=True)
+
+
+class ReceiveParcelProfile(models.Model):
+    """收件货物信息"""
+    rcargo_num = models.CharField(max_length=128, db_index=True, verbose_name=u'快递单号')
+    rname = models.CharField(choices=express_company, default="顺丰", max_length=32, verbose_name=u"物流名称")
+    receiver = models.ForeignKey(ExpressProfile, related_name="name", verbose_name=u"收件人信息")
+    rinfo = models.CharField(max_length=128, default='文件', verbose_name=u"物品类型")
+    remark = models.TextField(verbose_name='备注', null=True, blank=True)
+    rtime = models.DateTimeField(auto_now=True, db_index=True, verbose_name='收件时间')
 
 
 class UserParcelInfo(models.Model):
@@ -89,6 +100,7 @@ class Weight(models.Model):
     province_name = models.ForeignKey(Province)
     first_weight = models.IntegerField(verbose_name=u'首重')
     continue_weight = models.IntegerField(verbose_name=u'续重')
+
     class Meta:
         verbose_name = u"结算信息"
         verbose_name_plural = verbose_name

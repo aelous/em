@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+    <div class="clearfix">
+        <div class="page-content">
+            <div id="form">
+                <form role="form" method="post">
+                    <div class="mgb6">
+                        <h4><span class="label label-success arrowed-in-right label-lg float mgr6"><b>收件人信息</b></span>
+                        </h4>
+                        <div class="switch-check"><label class="switch-bg"><input type="checkbox" class="not-empty"
+                                                                                  name="switch"><span></span></label>
+                        </div>
+                        <a class="mgr4" href="javascript:void(0);" id="receiver_model">[选择历史收件人]</a>
+                    </div>
+
+                    <div class="panel panel-default panelBody">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                {{ form.rcargo_num.error }}
+                                <label for="{{ form.rcargo_num.id_for_label }}">
+                                    {{ form.rcargo_num.label }}:* </label>
+                                {{ form.rcargo_num }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.rname.error }}
+                                <label for="{{ form.rname.id_for_label }}">
+                                    {{ form.rname.label }}:* </label>
+                                {{ form.rname }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.name.error }}
+                                <label for="{{ form.name.id_for_label }}">
+                                    {{ form.name.label }}:* </label>
+                                {{ form.name }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.phone.error }}
+                                <label for="{{ form.phone.id_for_label }}">
+                                    {{ form.phone.label }}:* </label>
+                                {{ form.phone }}
+
+                            </div>
+                            <div class="form-group">
+                                {{ form.department.error }}
+                                <label for="{{ form.department.id_for_label }}">
+                                    {{ form.department.label }}:* </label>
+                                {{ form.department }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.floor.error }}
+                                <label for="{{ form.floor.id_for_label }}">
+                                    {{ form.floor.label }}:* </label>
+                                {{ form.floor }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.employee_id.error }}
+                                <label for="{{ form.employee_id.id_for_label }}">
+                                    {{ form.employee_id.label }}:* </label>
+                                {{ form.employee_id }}
+                            </div>
+
+
+                            {#                            <div class="form-inline form-group">#}
+                            {#                                <div id="distpicker">#}
+                            {#                                    {{ form.area.error }}#}
+                            {#                                    <label for="{{ form.area.id_for_label }}">#}
+                            {#                                        {{ form.area.label }}:* </label>#}
+                            {#                                    <div class="form-group">#}
+                            {#                                        <div style="position: relative;">#}
+                            {#                                            {{ form.area }}#}
+                            {#                                        </div>#}
+                            {#                                    </div>#}
+                            {#                                    <button class="btn btn-sm btn-warning" id="reset" type="button">重置</button>#}
+                            {#                                    <button class="btn btn-sm btn-danger" id="destroy" type="button">确定#}
+                            {#                                    </button>#}
+                            {#                                </div>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#                            <div class="form-group">#}
+                            {#                                {{ form.address.error }}#}
+                            {#                                <label for="{{ form.address.id_for_label }}">#}
+                            {#                                    {{ form.address.label }}:* </label>#}
+                            {#                                {{ form.address }}#}
+                            {#                            </div>#}
+
+
+                            <div class="form-group">
+                                {{ form.rinfo.error }}
+                                <label for="{{ form.rinfo.id_for_label }}">
+                                    {{ form.rinfo.label }}:* </label>
+                                {{ form.rinfo }}
+                            </div>
+
+                            {#                            <div class="form-group">#}
+                            {#                                {{ form.rtime.error }}#}
+                            {#                                <label for="{{ form.rtime.id_for_label }}">#}
+                            {#                                    {{ form.rtime.label }}:* </label>#}
+                            {#                                {{ form.rtime }}#}
+                            {#                            </div>#}
+
+                            <div class="form-group">
+                                {{ form.remark.error }}
+                                <label for="{{ form.remark.id_for_label }}">
+                                    {{ form.remark.label }}:* </label>
+                                {{ form.remark }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.is_getmsg.error }}
+                                <label for="{{ form.is_getmsg.id_for_label }}">
+                                    {{ form.is_getmsg.label }}:* </label>
+                                {{ form.is_getmsg }}
+                            </div>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="receiver_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        选择收件人
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table hover" cellspacing="0" width="100%" id="receiver_table">
+                        <thead>
+                        <tr>
+                            <th><span>姓名</span></th>
+                            <th><span>电话</span></th>
+{#                            <th><span>地区</span></th>#}
+{#                            <th><span>地址</span></th>#}
+                            <th><span>所属部门</span></th>
+                            <th><span>楼层</span></th>
+                            <th><span>员工工号</span></th>
+                            {#                            <th><span>操作</span></th>#}
+                        </tr>
+                        </thead>
+                        <tbody role="alert">
+                        {% for parcel in preceivers %}
+                            <tr/>
+                            <td class=""> {{ parcel.username }}</td>
+                            <td class=""> {{ parcel.phone }}</td>
+{#                            <td class=""> {{ parcel.area }}</td>#}
+{#                            <td class=""> {{ parcel.address }}</td>#}
+                            <td class=""> {{ parcel.department }}</td>
+                            <td class=""> {{ parcel.floor }}</td>
+                            <td class=""> {{ parcel.employee_id }}</td>
+                            {#                            <td class="">#}
+                            {#                                <div><a class="deliver_chose" style="color:#69aa46;margin:0 3px;cursor:pointer;">编辑</a></div>#}
+                            {#                            </td>#}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" id="deliver_button" data-dismiss="modal">
+                        选择
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}
+
+{% block extra_script %}
+    <script>
+        $(document).ready(function () {
+            console.log("test")
+
+            {#            $("#deliver_model").click(function () {#}
+            {#                $('#deliver_Modal').modal({#}
+            {#                    keyboard: true#}
+            {#                })#}
+            {#            });#}
+            {##}
+            {#            var table = $('#deliver_table').DataTable();#}
+            {##}
+            {#            var name = null;#}
+            {#            var phone = null;#}
+            {#            var area = null;#}
+            {#            var address = null;#}
+            {#            $('#deliver_table').on('click', 'tr', function () {#}
+            {#                if ($(this).hasClass('selected')) {#}
+            {#                    $(this).removeClass('selected');#}
+            {#                    name = null;#}
+            {#                    phone = null;#}
+            {#                    area = null;#}
+            {#                    address = null;#}
+            {#                }#}
+            {#                else {#}
+            {#                    table.$('tr.selected').removeClass('selected');#}
+            {#                    $(this).addClass('selected');#}
+            {#                    name = $(this).find("td:nth-child(1)").text();#}
+            {#                    phone = $(this).find("td:nth-child(2)").text();#}
+            {#                    area = $(this).find("td:nth-child(3)").text();#}
+            {#                    address = $(this).find("td:nth-child(4)").text();#}
+            {#                    department = $(this).find("td:nth-child(5)").text();#}
+            {#                    employee_id = $(this).find("td:nth-child(6)").text();#}
+            {##}
+            {##}
+            {#                }#}
+            {#            });#}
+            {##}
+            {#            $('#deliver_button').click(function () {#}
+            {#                if (area != null) {#}
+            {#                    $('#id_deliver_name').val(name);#}
+            {#                    $('#id_deliver_phone').val(phone);#}
+            {#                    $('#id_deliver_area').citypicker('destroy')#}
+            {#                    $('#id_deliver_area').val(area)#}
+            {#                    $('#id_deliver_address').val(address);#}
+            {#                    if (department != " None") {#}
+            {#                        $('#id_deliver_department').val(department);#}
+            {#                        $('#id_deliver_employee_id').val(employee_id);#}
+            {#                    }#}
+            {#                }#}
+            {#            })#}
+
+            {#            receiver model#}
+            $("#receiver_model").click(function () {
+                $('#receiver_Modal').modal({
+                    keyboard: true
+                })
+            });
+
+
+            var table = $('#receiver_table').DataTable();
+            var rname = null;
+            var rphone = null;
+            var rarea = null;
+            var raddress = null;
+            $('#receiver_table').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                    rname = null;
+                    rphone = null;
+{#                    rarea = null;#}
+{#                    raddress = null;#}
+                    department = null;
+                    floor = null;
+                    employee_id = null;
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    rname = $(this).find("td:nth-child(1)").text();
+                    rphone = $(this).find("td:nth-child(2)").text();
+{#                    rarea = $(this).find("td:nth-child(3)").text();#}
+{#                    raddress = $(this).find("td:nth-child(4)").text();#}
+                    department = $(this).find("td:nth-child(3)").text();
+                    floor = $(this).find("td:nth-child(4)").text();
+                    employee_id = $(this).find("td:nth-child(5)").text();
+
+
+                }
+            });
+
+            $('#deliver_button').click(function () {
+                if (rname != null) {
+                    $('#id_name').val(rname);
+                    $('#id_phone').val(rphone);
+{#                    $('#id_area').citypicker('destroy')#}
+{#                    $('#id_address').val(rarea)#}
+                    $('#id_department').val(department);
+                    $('#id_floor').val(floor);
+                    $('#id_employee_id').val(employee_id);
+                }
+            })
+
+
+            {#             city picker#}
+{#            $('#deliver_reset').click(function () {#}
+{#                $('#id_deliver_area').citypicker('destroy')#}
+{#                $('#id_deliver_area').val('');#}
+{#                $('#id_deliver_area').citypicker();#}
+{##}
+{#            })#}
+{##}
+{#            $('#receiver_reset').click(function () {#}
+{#                $('#id_receiver_area').citypicker('destroy')#}
+{#                $('#id_receiver_area').val('');#}
+{#                $('#id_receiver_area').citypicker()#}
+{#            })#}
+{##}
+{#            $('#deliver_destory').click(function () {#}
+{#                $('#id_deliver_area').citypicker('destroy')#}
+{#            })#}
+{##}
+{#            $('#receiver_destory').click(function () {#}
+{#                $('#id_receiver_area').citypicker('destroy')#}
+{#            })#}
+
+        });
+    </script>
+{% endblock %}
