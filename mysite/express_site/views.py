@@ -11,7 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, render_to_response, redirect
 from django.utils import timezone
-from pyExcelerator import Workbook
+# from pyExcelerator import Workbook
+from xlwt import Workbook
 from form import *
 from models import *
 from utils import get_date_range
