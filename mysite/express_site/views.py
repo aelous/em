@@ -231,7 +231,7 @@ def search(request):
             start_time = data['start_time']
             end_time = data['end_time']
             pnum = data['pnum']
-            pcargo_num = data['pcargo_num']
+            # pcargo_num = data['pcargo_num']
             deliver_name = data['deliver_name']
 
             user = UserProfile.objects.get(username=request.user)
