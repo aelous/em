@@ -12,6 +12,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, render_to_response, redirect
 from django.utils import timezone
 # from pyExcelerator import Workbook
+from django.utils.timezone import utc
 from xlwt import Workbook
 from form import *
 from models import *
@@ -140,7 +141,8 @@ def parcel(request):
 
                                       )
             receiver.save()
-            now = timezone.now()
+            # now = timezone.now()
+            now = datetime.datetime.utcnow().replace(tzinfo=utc)
             p = ParcelProfile(pnum=int(time.time()),
                               pname=data['pname'],
                               remark=data['remark'],
@@ -248,8 +250,8 @@ def search(request):
             else:
                 if pnum:
                     info = UserParcelInfo.objects.filter(user=user, parcel__pnum=pnum)
-                elif pcargo_num:
-                    info = UserParcelInfo.objects.filter(user=user, parcel__pcargo_num=pcargo_num)
+                # elif pcargo_num:
+                #     info = UserParcelInfo.objects.filter(user=user, parcel__pcargo_num=pcargo_num)
                 elif deliver_name:
                     info = UserParcelInfo.objects.filter(user=user, parcel__pdeliver__username=deliver_name)
                 else:
