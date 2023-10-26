@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User, AbstractUser
 from django.db import models
-from util import *
+from express_site.util import *
 
 
 # Create your models here.
@@ -50,8 +50,8 @@ class ParcelProfile(models.Model):
     # pis_cost = models.BooleanField(default=False, verbose_name=u"快递是否付费")
     ppayment = models.CharField(choices=(('现结', '现结'), ('月结', '月结')), default='现结', max_length=32, verbose_name='结算方式')
 
-    pdeliver = models.ForeignKey(ExpressProfile, related_name="deliver_name", verbose_name=u"发件人信息")
-    preceiver = models.ForeignKey(ExpressProfile, related_name="receiver_name", verbose_name=u"收件人信息")
+    pdeliver = models.ForeignKey(ExpressProfile, related_name="deliver_name", verbose_name=u"发件人信息", on_delete=models.CASCADE)
+    preceiver = models.ForeignKey(ExpressProfile, related_name="receiver_name", verbose_name=u"收件人信息", on_delete=models.CASCADE)
 
     remark = models.TextField(verbose_name='备注', null=True, blank=True)
     ptime = models.DateTimeField(auto_now=True, db_index=True, verbose_name='寄件时间')
@@ -62,15 +62,15 @@ class ReceiveParcelProfile(models.Model):
     """收件货物信息"""
     rcargo_num = models.CharField(max_length=128, db_index=True, verbose_name=u'快递单号')
     rname = models.CharField(choices=express_company, default="顺丰", max_length=32, verbose_name=u"物流名称")
-    receiver = models.ForeignKey(ExpressProfile, related_name="name", verbose_name=u"收件人信息")
+    receiver = models.ForeignKey(ExpressProfile, related_name="name", verbose_name=u"收件人信息", on_delete=models.DO_NOTHING)
     rinfo = models.CharField(max_length=128, default='文件', verbose_name=u"物品类型")
     remark = models.TextField(verbose_name='备注', null=True, blank=True)
     rtime = models.DateTimeField(auto_now=True, db_index=True, verbose_name='收件时间')
 
 
 class UserParcelInfo(models.Model):
-    user = models.ForeignKey(UserProfile)
-    parcel = models.ForeignKey(ParcelProfile)
+    user = models.ForeignKey(UserProfile,on_delete=models.DO_NOTHING) 
+    parcel = models.ForeignKey(ParcelProfile, on_delete=models.DO_NOTHING)
 
 
 class Express(models.Model):
@@ -96,8 +96,8 @@ class Province(models.Model):
 
 
 class Weight(models.Model):
-    express_name = models.ForeignKey(Express)
-    province_name = models.ForeignKey(Province)
+    express_name = models.ForeignKey(Express, on_delete=models.DO_NOTHING)
+    province_name = models.ForeignKey(Province, on_delete=models.DO_NOTHING)
     first_weight = models.IntegerField(verbose_name=u'首重')
     continue_weight = models.IntegerField(verbose_name=u'续重')
 

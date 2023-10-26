@@ -14,28 +14,33 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+#from django.conf.urls import url
 from django.contrib import admin
 from express_site import views
 
+from django.contrib import admin
+from django.urls import path
+
 urlpatterns = [
     # url(r'', views.test, name='index'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^login/$', views.login, name='login'),
-    url(r'^logout/$', views.logout, name='logout'),
-    url(r'^register/$', views.register, name='register'),
-    url(r'^index/$', views.index, name='index'),
-    url(r'^complete/$', views.complete, name='complete'),
-    url(r'^parcel/$', views.parcel, name='parcel'),
-    url(r'^upload/$', views.upload, name='upload'),
-    url(r'^search/$', views.search, name='search'),
-    url(r'^settle/$', views.settle, name='settle'),
-    url(r'^record/$', views.record, name='record'),
-    url(r'^test/$', views.test, name='test'),
-    url(r'^receive/$', views.receive, name='receive'),
-    url(r'^receive_query/$', views.receive_query, name='receive_query'),
-    url(r'^receive_query/(?P<action>(\w+))', views.receive_query),
-    url(r'^$', views.login),
+    path(r'^admin/', admin.site.urls),
+    # path(r'^login/$', views.login, name='login'),
+    path('login', views.login, name='login'),
+    path(r'^logout/$', views.logout, name='logout'),
+    path(r'^register/$', views.register, name='register'),
+    # path('', views.index, name='index'),
+    path('index', views.index, name='index'),
+    path(r'^complete/$', views.complete, name='complete'),
+    path(r'^parcel/$', views.parcel, name='parcel'),
+    path(r'^upload/$', views.upload, name='upload'),
+    path(r'^search/$', views.search, name='search'),
+    path(r'^settle/$', views.settle, name='settle'),
+    path(r'^record/$', views.record, name='record'),
+    path(r'^test/$', views.test, name='test'),
+    path(r'^receive/$', views.receive, name='receive'),
+    path(r'^receive_query/$', views.receive_query, name='receive_query'),
+    path(r'^receive_query/(?P<action>(\w+))', views.receive_query),
+    path('', views.login),
 
 ]
 

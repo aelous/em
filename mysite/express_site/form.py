@@ -2,8 +2,8 @@
 import datetime
 from django import forms
 from django.contrib.admin import widgets
-from util import *
-from models import UserProfile, ParcelProfile, ReceiveParcelProfile
+from express_site.util import *
+from express_site.models import UserProfile, ParcelProfile, ReceiveParcelProfile
 
 
 class LoginForm(forms.Form):

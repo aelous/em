@@ -5,18 +5,19 @@ import os
 import time
 import uuid
 
-import StringIO
+from io import StringIO
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, render_to_response, redirect
+# from django.shortcuts import render, render, redirect
+from django.shortcuts import render
 from django.utils import timezone
 # from pyExcelerator import Workbook
 from django.utils.timezone import utc
 from xlwt import Workbook
-from form import *
-from models import *
-from utils import get_date_range
+from express_site.form import *
+from express_site.models import *
+# from utils import get_date_range
 
 
 def login(request):
@@ -41,12 +42,12 @@ def login(request):
             return HttpResponseRedirect('/index')
         else:
             status = True
-            return render_to_response('login.html', locals())
+            return render(request,'login.html', locals())
 
     else:
         form = LoginForm()
 
-    return render_to_response('login.html', locals())
+    return render(request,'login.html', locals())
 
 
 def logout(request):
@@ -62,7 +63,6 @@ def register(request):
             input_pwd = request.POST.get('password')
             # input_rank = request.POST.get('is_admin')
             input_rank = request.POST.get('is_superuser')
-            print input_username, input_pwd, input_rank
 
             if input_rank == 'on':
                 UserProfile.objects.create_user(username=input_username, password=input_pwd, is_superuser=True,
@@ -71,16 +71,16 @@ def register(request):
                 UserProfile.objects.create_user(username=input_username, password=input_pwd, is_staff=True)
             message = '注册成功，请登录'
             return HttpResponseRedirect('/login/', {'message': '注册成功，请登录'})
-            # return render_to_response('login.html', locals())
+            # return render(request,'login.html', locals())
 
     else:
         form = RegisterForm()
-    return render_to_response('register.html', locals())
+    return render(request,'register.html', locals())
 
 
 def index(request):
     user = request.user
-    return render_to_response('index.html', locals())
+    return render(request, 'index.html', locals())
 
 
 @login_required(login_url='login')
@@ -99,7 +99,7 @@ def complete(request):
             message = '保存成功'
     else:
         form = CompleteForm()
-    return render_to_response('complete.html', locals())
+    return render(request,'complete.html', locals())
 
 
 @login_required(login_url='login')
@@ -121,7 +121,7 @@ def parcel(request):
 
     if request.method == 'POST':
         form = ParcelForm(request.POST)
-        print form.is_valid(), form.errors
+        #print form.is_valid(), form.errors
         if form.is_valid():
             data = form.cleaned_data
             deliver = ExpressProfile(username=data['deliver_name'],
@@ -156,14 +156,12 @@ def parcel(request):
                               )
             p.save()
             user = UserProfile.objects.get(username=request.user)
-            print user, p
             u = UserParcelInfo(user=user, parcel=p)
             u.save()
             message = 'save success'
     else:
-        print 'error'
         form = ParcelForm()
-    return render_to_response('send.html', locals())
+    return render(request,'send.html', locals())
 
 
 @login_required(login_url='login')
@@ -177,7 +175,6 @@ def upload(request):
             data = xlrd.open_workbook(file_contents=input_excel.read())
             table = data.sheets()[0]
             nrows = table.nrows
-            print nrows
             if nrows <= 20000:
                 excel_list = []
                 uid = str(uuid.uuid4())
@@ -209,19 +206,19 @@ def upload(request):
                 excel_confirm = True
                 excel_list_show = excel_list
                 message = '上传成功'
-                return render_to_response('upload.html', locals())
+                return render(request,'upload.html', locals())
             else:
                 error_list = [u'短信数量提交过多，拒绝发送']
-                return render_to_response('upload.html', locals())
+                return render(request,'upload.html', locals())
         if 'input_excel' not in request.FILES:
             error_list = [u'您没有提交任何信息']
 
-            return render_to_response('upload.html', locals())
+            return render(request,'upload.html', locals())
 
 
     else:
         form = UploadForm()
-    return render_to_response('upload.html', locals())
+    return render(request,'upload.html', locals())
 
 
 @login_required(login_url='login')
@@ -259,14 +256,14 @@ def search(request):
                                                          parcel__ptime__lte=end_time)
     else:
         form = SearchForm()
-    return render_to_response('search.html', locals())
+    return render(request,'search.html', locals())
 
 
 @login_required(login_url='login')
 def settle(request):
     info = ParcelProfile.objects.all()
     company = [i[0] for i in express_company]
-    return render_to_response('settle.html', locals())
+    return render(request,'settle.html', locals())
 
 
 @login_required(login_url='login')
@@ -300,10 +297,10 @@ def record(request):
                 p = p[0]
                 p_cargo_init = 1
                 form = ParcelForm()
-                return render_to_response('record.html', locals())
+                return render(request,'record.html', locals())
             else:
                 message = '请输入正确的订单号'
-                return render_to_response('record.html', locals())
+                return render(request,'record.html', locals())
 
         else:
             form = ParcelForm2(request.POST)
@@ -335,12 +332,11 @@ def record(request):
                 # p.preceiver = receiver
                 p.save()
             else:
-                return render_to_response('record.html', locals())
+                return render(request,'record.html', locals())
                 form = ParcelForm()
     else:
-        print 'error'
         form = ParcelForm()
-    return render_to_response('record.html', locals())
+    return render(request,'record.html', locals())
 
 
 @login_required(login_url='login')
@@ -354,9 +350,7 @@ def receive(request):
     if preceiver_name:
         for i in preceiver_name:
             preceivers.append(ExpressProfile.objects.filter(username=i)[0])
-    print preceivers
 
-    print request
     if request.method == 'POST':
         form = ReceiveParcelForm(request.POST)
         if form.is_valid():
@@ -380,7 +374,7 @@ def receive(request):
         # form = ReceiveParcelForm()
     else:
         form = ReceiveParcelForm()
-    return render_to_response('receive.html', locals())
+    return render(request,'receive.html', locals())
 
 
 @login_required(login_url='login')
@@ -430,7 +424,7 @@ def receive_query(request, action=None):
 
     else:
         form = SearchForm()
-    return render_to_response('receive_query.html', locals())
+    return render(request,'receive_query.html', locals())
 
 
 def test():
